@@ -606,16 +606,6 @@ export default function App() {
   return () => window.removeEventListener("beforeinstallprompt", handler);
  }, []);
 
- // Detectar subida de nivel y lanzar fuegos artificiales
- useEffect(() => {
-  if (!registered) return;
-  const lastLevel = parseInt(_ls("hv_lastlevel") || "-1");
-  if (nivelIdx > lastLevel) {
-   if (lastLevel >= 0) { lanzarConfetti(); setTimeout(lanzarConfetti, 600); }
-   _lss("hv_lastlevel", String(nivelIdx));
-  }
- }, [nivelIdx, registered]);
-
  // Compute days as vegan
  const diasVegano = (() => {
  if (!registered) return 30;
@@ -657,6 +647,15 @@ export default function App() {
   return Math.min(100, ((diasVegano - actual) / (siguiente - actual)) * 100);
  })();
  const nivelSig = nivelIdx < NIVELES.length - 1 ? NIVELES[nivelIdx + 1] : null;
+ // Detectar subida de nivel y lanzar fuegos artificiales (después de nivelIdx ya definido)
+ useEffect(() => {
+  if (!registered) return;
+  const lastLevel = parseInt(_ls("hv_lastlevel") || "-1");
+  if (nivelIdx > lastLevel) {
+   if (lastLevel >= 0) { lanzarConfetti(); setTimeout(lanzarConfetti, 600); }
+   _lss("hv_lastlevel", String(nivelIdx));
+  }
+ }, [nivelIdx, registered]);
  const novPendientes = NOVEDADES.filter(n => !vistosNov.includes(n.id));
  const hayNovedad  = novPendientes.length > 0;
  const go = s => setScreen(s);
