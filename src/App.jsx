@@ -1,159 +1,109 @@
 import { useState } from "react";
 const REVELACIONES = [
- // ── ESTADÍSTICAS E IMPACTO ──
- {
- id:"r1",e:"🌊",f:["Producir ","1 kg de ternera"," consume tanta agua como ducharse durante ","6 meses"],
- q:"\"Lo que haces a la naturaleza,te lo haces a ti mismo.\""
- },
- {
- id:"r2",e:"🌍",f:["Si el mundo adoptara una dieta vegana,las emisiones de gases de efecto invernadero bajarían un ","70%"],
- q:"\"El planeta no necesita más 'gente de éxito'. Necesita más pacificadores,sanadores y amantes de toda forma de vida.\""
- },
- {
- id:"r3",e:"🐾",f:["Cada año son sacrificados ","80.000 millones"],
- q:"\"El tiempo llegará en que los hombres mirarán el asesinato de animales como hoy miramos el asesinato de hombres.\" — Leonardo da Vinci"
- },
- {
- id:"r4",e:"💚",f:["Las personas veganas tienen un ","25% menos riesgo"],
- q:"\"Cuida tu cuerpo. Es el único lugar que tienes para vivir.\" — Jim Rohn"
- },
- {
- id:"r5",e:"🌱",f:["Una persona vegana produce ","50% menos CO₂"],
- q:"\"No heredamos la tierra de nuestros padres,la pedimos prestada a nuestros hijos.\" — Antoine de Saint-Exupéry"
- },
- // ── FRASES DE FAMOSOS ──
- {
- id:"r6",e:"✨",f:["\"Nada beneficiará más a la salud humana y aumentará las posibilidades de supervivencia de vida en la Tierra como la evolución hacia ","una dieta vegetariana","\""],
- q:"— Albert Einstein,Premio Nobel de Física"
- },
- {
- id:"r7",e:"🥩",f:["\"Si los mataderos tuvieran paredes de cristal, ","todo el mundo sería vegetariano","\""],
- q:"— Paul McCartney,músico y activista"
- },
- {
- id:"r8",e:"🏆",f:["Lewis Hamilton ganó ","7 Campeonatos del Mundo"],
- q:"\"Ser vegano ha transformado mi cuerpo y mi mente de maneras que no esperaba.\" — Lewis Hamilton"
- },
- // ── MÁS ESTADÍSTICAS ──
- {
- id:"r9",e:"⚡",f:["Las personas veganas reportan ","niveles de energía notablemente más altos"],
- q:"\"Tu cuerpo es la única casa que tendrás para siempre. Cuídala.\""
- },
- {
- id:"r10",e:"🌾",f:["Para producir ","1 kg de proteína animal"," se necesitan hasta ","8 kg de proteína vegetal"],
- q:"\"El mundo tiene suficiente para las necesidades de todos,pero no para la codicia de todos.\" — Mahatma Gandhi"
- },
- {
- id:"r11",e:"🫀",f:["Una dieta vegana puede ","revertir"],
- q:"\"Que tu alimento sea tu medicina y tu medicina sea tu alimento.\" — Hipócrates"
- },
- // ── MÁS FRASES DE FAMOSOS ──
- {
- id:"r12",e:"🐍",f:["\"Para que los hombres no maten a otros hombres,primero deben dejar de matar ","a los animales","\""],
- q:"— Pitágoras,filósofo y matemático (570 a.C.)"
- },
- {
- id:"r13",e:"🎾",f:["Novak Djokovic ganó ","24 Grand Slams"],
- q:"\"El cuerpo es el templo de tu alma. Si lo tratas bien,te recompensará.\" — Novak Djokovic"
- },
- {
- id:"r14",e:"🌳",f:["La ganadería ocupa el ","80% de la tierra agrícola mundial"," y produce solo el ","20% de las calorías globales"],
- q:"\"La Tierra no nos pertenece. Pertenecemos a la Tierra.\" — Jefe Seattle"
- },
- {
- id:"r15",e:"🧬",f:["Un estudio con gemelos publicado en 2023 demostró que la dieta vegana ","frena el envejecimiento biológico"],
- q:"\"La forma más profunda de amor propio es alimentar tu cuerpo con lo que lo hace florecer.\""
- },
- // ── FRASES INSPIRADORAS ──
- {
- id:"r16",e:"✊",f:["\"No hay nada más poderoso que un individuo actuando desde ","su conciencia","\""],
- q:"— Ralph Waldo Emerson,filósofo"
- },
- {
- id:"r17",e:"🐄",f:["\"Hasta que hayas amado a un animal, ","una parte de tu alma permanecerá dormida","\""],
- q:"— Anatole France,Premio Nobel de Literatura"
- },
- {
- id:"r18",e:"📈",f:["En enero de 2024, ","25 millones de personas"],
- q:"\"Primero te ignoran,luego se ríen de ti,luego te atacan,luego ganas.\" — Mahatma Gandhi"
- },
- {
- id:"r19",e:"🫁",f:["Las personas veganas tienen ","23% menos riesgo"],
- q:"\"La prevención es la cura más poderosa que existe.\""
- },
- {
- id:"r20",e:"🥊",f:["Mike Tyson,el púgil más temido de la historia,se hizo vegano y afirma que es ","el mejor regalo"],
- q:"\"Todo el mundo tiene un plan hasta que le dan un puñetazo. Cambiar mi dieta fue mi mayor golpe.\"\u00a0— Mike Tyson"
- },
- {
- id:"r21",e:"🐬",f:["\"Si quieres saber si tu corazón está en el lugar correcto, ","observa cómo tratas a los animales","\""],
- q:"— Fiódor Dostoyevski,escritor"
- },
- {
- id:"r22",e:"🧪",f:["La carne procesada fue clasificada por la OMS en ","Grupo 1 de cancerígenos"],
- q:"\"El conocimiento que no se aplica no cambia nada.\""
- },
- {
- id:"r23",e:"🧠",f:["\"Nada beneficiará tanto la salud humana y aumentará las posibilidades de supervivencia de la vida en la Tierra como la ","evolución hacia una dieta vegetariana","\""],
- q:"— Albert Einstein,físico"
- },
- {
- id:"r24",e:"💎",f:["\"Mientras los hombres masacren a los animales, ","seguirán matándose unos a otros","\""],
- q:"— Pitágoras,matemático y filósofo"
- },
- {
- id:"r25",e:"⚖️",f:["\"Todo lo que haces a otros, ","regresa a ti multiplicado",". Es la ley más antigua del universo.\""],
- q:"— Principio universal · Karma,regla de oro,ley de causa y efecto"
- },
- {
- id:"r26",e:"🏆",f:["Lewis Hamilton ganó ","sus 7 mundiales de F1"," siendo vegano. Djokovic suma 24 Grand Slams. Mike Tyson recuperó su forma. La élite ya lo sabe."],
- q:"\"La proteína vegetal no solo funciona — me hace mejor atleta.\" — Lewis Hamilton"
- },
- {
- id:"r27",e:"💪",f:["Patrik Baboumian,hombre más fuerte de Alemania, ","cargó 555kg en sus hombros"," siendo 100% vegano. \"¿De dónde sacas la fuerza?\" — \"De las plantas,igual que el toro.\""],
- q:"— Patrik Baboumian,strongman"
- },
- {
- id:"r28",e:"🌊",f:["El sector ganadero genera más gases de efecto invernadero que ","todos los aviones,coches,barcos y trenes del mundo juntos","."],
- q:"— Informe FAO de la ONU"
- },
- {
- id:"r29",e:"💧",f:["Producir 1kg de carne de vacuno requiere ","15.400 litros de agua",". Producir 1kg de legumbres: 4.000 litros."],
- q:"— Water Footprint Network"
- },
- {
- id:"r30",e:"🌱",f:["\"No matarás\" no dice ","\"no matarás humanos\"",". Lo dice todo. Y todo significa todo lo que siente,ama y teme.\""],
- q:"— León Tolstói,escritor"
- },
- {
- id:"r31",e:"🌍",f:["Cada año son sacrificados ","más de 80.000 millones de animales terrestres"," para alimentación. Más 1-3 billones de peces. Cada uno sintió miedo."],
- q:"— FAO,datos globales anuales"
- },
- {
- id:"r32",e:"🧘",f:["\"La grandeza de una nación y su progreso moral pueden medirse por ","cómo tratan a sus animales","\""],
- q:"— Mahatma Gandhi"
- },
- {
- id:"r33",e:"🏃",f:["Scott Jurek,ultramaratoniano vegano,corrió ","3.523km del sendero Appalachian"," en 46 días — un récord mundial. \"Las plantas me dieron lo que la carne nunca pudo.\""],
- q:"— Scott Jurek,leyenda del ultrafondo"
- },
- {
- id:"r34",e:"✨",f:["Tu cuerpo se renueva por completo cada 7 años. Cada célula nueva ","la construyes con lo que comes",". Decide qué versión de ti quieres ser."],
- q:"— Biología celular"
- },
- {
- id:"r35",e:"🐟",f:["El 70% de los océanos están sobreexplotados. Sin pesca masiva, ","los océanos se regenerarían en 10 años","."],
- q:"— Documental Seaspiracy · Datos científicos"
- },
- {
- id:"r36",e:"🌿",f:["Venus Williams se hizo vegana tras un diagnóstico autoinmune. Volvió a ganar Grand Slams. \"La comida ","puede ser tu medicina o tu veneno",". Yo elegí mi medicina.\""],
- q:"— Venus Williams,tenista"
- },
- {
- id:"r37",e:"💫",f:["Cuando dejas de formar parte del sufrimiento, ","tu vida cambia",". Mejor salud,más energía,paz interior. Te conviertes en tu mejor versión."],
- q:"\"Cada vez que cambias lo que comes,cambias quién eres.\" — Anónimo"
- },
+ {id:"r1",e:"💧",f:["Producir ","1 kg de ternera"," consume tanta agua como ducharse durante ","6 meses"],q:"\"Lo que haces a la naturaleza, te lo haces a ti mismo.\""},
+ {id:"r2",e:"🌍",f:["Si el mundo adoptara una dieta vegana, reduciríamos las emisiones de gases de efecto invernadero relacionadas con la alimentación en un ","70%"],q:"— Estudio Universidad de Oxford, 2016"},
+ {id:"r3",e:"🐄",f:["Una vaca ","llora lágrimas reales"," cuando le separan a su cría. Tiene el mismo sistema límbico que tú."],q:"— Neurociencia animal — Cambridge Declaration on Consciousness, 2012"},
+ {id:"r4",e:"🧬",f:["Los veganos tienen un ","32% menos de riesgo"," de enfermedad cardíaca según el mayor estudio nutricional de la historia."],q:"— EPIC-Oxford Study, Universidad de Oxford"},
+ {id:"r5",e:"🌱",f:["Con la tierra usada para criar animales para comida, podríamos alimentar a ","4 veces la población mundial"," con vegetales."],q:"— FAO, Naciones Unidas"},
+ {id:"r6",e:"✨",f:["\"El que es cruel con los animales ","no puede ser un buen hombre",".\""],q:"— Arthur Schopenhauer, filósofo"},
+ {id:"r7",e:"🏥",f:["La carne procesada fue clasificada por la OMS como ","carcinógeno Grupo 1",", la misma categoría que el tabaco y el amianto."],q:"— Organización Mundial de la Salud, 2015"},
+ {id:"r8",e:"🐷",f:["Los cerdos son más inteligentes que los perros. ","Superan a los perros en tests cognitivos"," y tienen la inteligencia emocional de un niño de 3 años."],q:"— Cambridge University, estudios de cognición animal"},
+ {id:"r9",e:"🌊",f:["El 46% del plástico en los océanos son ","redes de pesca abandonadas",". No las pajitas. Las redes."],q:"— Estudio Ocean Cleanup Foundation, 2018"},
+ {id:"r10",e:"⚡",f:["Carl Lewis ganó ","9 medallas olímpicas de oro"," siendo vegano. \"Mi mejor año atlético fue el primero siendo vegano.\""],q:"— Carl Lewis, velocista olímpico"},
+ {id:"r11",e:"🧠",f:["\"Nada beneficiará tanto la salud humana ni aumentará las posibilidades de supervivencia en la Tierra como la ","evolución hacia una dieta vegetariana",".\""],q:"— Albert Einstein, físico, Premio Nobel"},
+ {id:"r12",e:"🐟",f:["Los peces tienen receptores del dolor idénticos a los nuestros. ","Sienten el dolor igual que tú.","\""],q:"— Dr. Victoria Braithwaite, Universidad de Edimburgo — Do Fish Feel Pain?, 2010"},
+ {id:"r13",e:"🏭",f:["La ganadería industrial usa el ","80% de la tierra agrícola mundial"," y produce solo el 20% de las calorías globales."],q:"— Our World in Data, Universidad de Oxford"},
+ {id:"r14",e:"💪",f:["Novak Djokovic, ","24 Grand Slams",", lleva años con dieta vegana. \"Cambió todo: energía, concentración, recuperación.\""],q:"— Novak Djokovic, mejor tenista de la historia"},
+ {id:"r15",e:"🌏",f:["En India la vaca es sagrada. En Vietnam se comen los perros. En Occidente comemos cerdos y vacas. ","Ninguno tiene razón absoluta."," El sufrimiento no depende del animal. Depende de quién lo mira."],q:"— Reflexión intercultural"},
+ {id:"r16",e:"🧪",f:["Un estudio de Stanford con gemelos idénticos demostró que en 8 semanas el gemelo vegano tenía ","marcadores de envejecimiento más lentos"," y menor inflamación sistémica."],q:"— Stanford University, Prevención, 2023"},
+ {id:"r17",e:"🐋",f:["Las ballenas son los mayores sumideros de CO₂ del planeta. ","Una ballena captura el equivalente a 33 toneladas de CO₂.","\""],q:"— Fondo Monetario Internacional, 2019"},
+ {id:"r18",e:"🏅",f:["Venus Williams se hizo vegana tras un diagnóstico autoinmune. ","Volvió a ganar Grand Slams"," después. \"La comida puede ser tu medicina o tu veneno.\""],q:"— Venus Williams, tenista"},
+ {id:"r19",e:"⚖️",f:["\"Mientras los hombres masacren a los animales, ","seguirán matándose unos a otros",".\""],q:"— Pitágoras, matemático y filósofo"},
+ {id:"r20",e:"🦠",f:["El 75% de las enfermedades infecciosas emergentes vienen de animales. ","La COVID-19, el Ébola, la gripe porcina.","\""],q:"— OMS y CDC — zoonosis"},
+ {id:"r21",e:"🐬",f:["\"Si quieres saber si tu corazón está en el lugar correcto, ","observa cómo tratas a los animales",".\""],q:"— Fiódor Dostoyevski, escritor"},
+ {id:"r22",e:"🔬",f:["La carne procesada fue clasificada por la OMS en ","Grupo 1 de cancerígenos","."],q:"\"El conocimiento que no se aplica no cambia nada.\""},
+ {id:"r23",e:"🧠",f:["\"Nada beneficiará tanto la salud humana y aumentará las posibilidades de supervivencia de la vida en la Tierra como la ","evolución hacia una dieta vegetariana","."],q:"— Albert Einstein"},
+ {id:"r24",e:"💎",f:["\"Mientras los hombres masacren a los animales, ","seguirán matándose unos a otros",".\""],q:"— Pitágoras, matemático y filósofo"},
+ {id:"r25",e:"⚖️",f:["\"Todo lo que haces a otros, ","regresa a ti multiplicado",". Es la ley más antigua del universo.\""],q:"— Principio universal · Karma, regla de oro, ley de causa y efecto"},
+ {id:"r26",e:"🏆",f:["Lewis Hamilton ganó ","sus 7 mundiales de F1"," siendo vegano. Djokovic suma 24 Grand Slams. Mike Tyson recuperó su forma. ","La élite ya lo sabe.","."],q:"\"La proteína vegetal no solo funciona — me hace mejor atleta.\" — Lewis Hamilton"},
+ {id:"r27",e:"💪",f:["Patrik Baboumian, hombre más fuerte de Alemania, ","cargó 555kg en sus hombros"," siendo 100% vegano."],q:"\"¿De dónde sacas la fuerza?\" \"De las plantas, igual que el toro.\" — Patrik Baboumian"},
+ {id:"r28",e:"🌊",f:["El sector ganadero genera más gases de efecto invernadero que ","todos los aviones, coches, barcos y trenes del mundo juntos","."],q:"— Informe FAO de la ONU"},
+ {id:"r29",e:"💧",f:["Producir 1kg de carne de vacuno requiere ","15.400 litros de agua",". Producir 1kg de legumbres: 4.000 litros."],q:"— Water Footprint Network"},
+ {id:"r30",e:"🌱",f:["\"No matarás\" no dice ","\"solo a humanos\"",". Lo dice todo. Y todo significa todo lo que siente, ama y teme."],q:"— León Tolstói, escritor y filósofo"},
+ {id:"r31",e:"🌍",f:["Cada año son sacrificados ","más de 80.000 millones de animales terrestres"," para alimentación. Cada uno sintió miedo."],q:"— FAO, datos globales anuales"},
+ {id:"r32",e:"🧘",f:["\"La grandeza de una nación y su progreso moral pueden medirse por ","cómo tratan a sus animales",".\""],q:"— Mahatma Gandhi"},
+ {id:"r33",e:"🏃",f:["Scott Jurek, ultramaratoniano vegano, corrió ","3.523km del sendero Appalachian"," en 46 días batiendo el récord mundial."],q:"\"Las plantas me dieron lo que la carne nunca pudo.\" — Scott Jurek"},
+ {id:"r34",e:"✨",f:["Tu cuerpo se renueva por completo cada 7 años. Cada célula nueva ","la construyes con lo que comes",". Decide qué versión de ti quieres ser."],q:"— Biología celular"},
+ {id:"r35",e:"🐟",f:["El 70% de los océanos están sobreexplotados. Sin pesca masiva, ","los océanos se regenerarían en 10 años","."],q:"— Seaspiracy, datos científicos"},
+ {id:"r36",e:"🌿",f:["Venus Williams se hizo vegana tras un diagnóstico autoinmune. Volvió a ganar. \"La comida ","puede ser tu medicina o tu veneno",". Yo elegí mi medicina.\""],q:"— Venus Williams, tenista"},
+ {id:"r37",e:"💫",f:["Cuando dejas de formar parte del sufrimiento, ","tu vida cambia",". Mejor salud, más energía, paz interior. Tu mejor versión."],q:"\"Cada vez que cambias lo que comes, cambias quién eres.\""},
+ {id:"r38",e:"🎸",f:["Paul McCartney lleva décadas siendo vegano. \"","Si los mataderos tuvieran paredes de cristal",", todo el mundo sería vegetariano.\""],q:"— Paul McCartney, The Beatles"},
+ {id:"r39",e:"📊",f:["Un estudio con 96.000 personas demostró que los veganos tienen ","57% menos de diabetes tipo 2"," que los omnívoros."],q:"— Adventist Health Study-2, Universidad de Loma Linda"},
+ {id:"r40",e:"🦁",f:["Los gorilas más fuertes del mundo — hasta 10 veces más fuertes que un humano — ","comen 100% plantas",". La fuerza no viene de la carne."],q:"— Biología comparada animal"},
+ {id:"r41",e:"🧬",f:["Las personas veganas tienen en promedio un ","índice de masa corporal 5 puntos más bajo"," que los omnívoros y viven más años."],q:"— EPIC-Oxford Study, 20 años de seguimiento"},
+ {id:"r42",e:"🌺",f:["\"No puedo imaginar ningún espíritu elevado ","que quiera continuar comiendo carne",".\""],q:"— Leonardo da Vinci, genio universal · pintor, escultor, científico, inventor"},
+ {id:"r43",e:"🎯",f:["Joaquin Phoenix, ","Oscar al mejor actor",", dedica su vida al activismo vegano. \"Damos voz a quienes no pueden hablar.\""],q:"— Joaquin Phoenix, discurso Oscars 2020"},
+ {id:"r44",e:"🌾",f:["Si todos los humanos fuéramos veganos, ","liberaríamos el 75% de la tierra agrícola mundial",". Suficiente para reforestar Europa, EE.UU., China y Australia juntos."],q:"— Universidad de Oxford, 2018"},
+ {id:"r45",e:"🔥",f:["Serena Williams, ","23 títulos de Grand Slam",", adoptó la dieta vegana. \"Me siento más fuerte, más rápida y más enfocada.\""],q:"— Serena Williams, tenista"},
+ {id:"r46",e:"🧿",f:["\"En todas las tradiciones espirituales —budismo, hinduismo, jainismo, primeras civilizaciones— ","no hacer daño a los seres vivos"," era la base de la sabiduría.\""],q:"— Ahimsa, principio universal de no violencia"},
+ {id:"r47",e:"💡",f:["Cada vegano ahorra de media ","1.500 kg de CO₂ al año",", 400.000 litros de agua y la vida de 100 animales. Solo cambiando lo que come."],q:"— The Vegan Society, cálculo anual"},
+ {id:"r48",e:"🏋️",f:["Kendrick Farris, único halterófilo americano en los Juegos Olímpicos de Río 2016, ","levantó más peso que nunca siendo vegano","."],q:"— Kendrick Farris, halterófilo olímpico"},
+ {id:"r49",e:"🌙",f:["\"Hay una violencia que no reconocemos como tal ","porque la hemos normalizado desde pequeños",".\""],q:"— Reflexión filosófica contemporánea"},
+ {id:"r50",e:"🐘",f:["Los elefantes — los animales terrestres más fuertes del planeta —","son herbívoros puros",". 6.000kg de músculo construido solo con plantas."],q:"— Biología animal"},
+ {id:"r51",e:"📱",f:["El 69% de los jóvenes de 18-35 años ya ","reduce su consumo de carne"," activamente. El cambio ya está ocurriendo."],q:"— Ipsos Global Trends, 2023"},
+ {id:"r52",e:"🫀",f:["La dieta vegana puede ","revertir enfermedades cardíacas",", no solo prevenirlas. Es el único tratamiento dietético con evidencia de reversión."],q:"— Dr. Dean Ornish, Universidad de California — estudio con seguimiento de 5 años"},
+ {id:"r53",e:"🕊️",f:["\"No hay amor sincero mientras ","se siga comiendo animales",".\""],q:"— George Bernard Shaw, dramaturgo, Premio Nobel Literatura"},
+ {id:"r54",e:"🌿",f:["Miley Cyrus, Billie Eilish, Natalie Portman, Ariana Grande, Woody Harrelson. ","La cultura pop ya eligió","."],q:"Cuando la élite cultural habla, el mundo escucha."},
+ {id:"r55",e:"⚡",f:["Tu cerebro funciona mejor con una dieta basada en plantas. ","Menor inflamación neurológica"," equivale a mayor claridad mental, mejor memoria y menos depresión."],q:"— Nutritional Neuroscience Journal, 2020"},
+ {id:"r56",e:"🌊",f:["Por cada kilo de pescado capturado en alta mar, ","se capturan y matan 5kg de otras especies"," involuntariamente (delfines, tortugas, tiburones)."],q:"— FAO, bycatch data"},
+ {id:"r57",e:"🏆",f:["El equipo ciclista Bahrain Victorious, ","ganador de etapas en el Tour de France",", adoptó nutrición 100% vegetal para recuperación."],q:"— Bahrain Victorious Team, 2022"},
+ {id:"r58",e:"🧘",f:["\"Practica la no violencia no solo en palabras y pensamientos. ","Praticala en tu plato.","\""],q:"— Mahatma Gandhi"},
+ {id:"r59",e:"🔬",f:["La Harvard Medical School recomienda la dieta basada en plantas como ","la más eficaz para prevenir las 5 principales causas de muerte"," en el mundo occidental."],q:"— Harvard T.H. Chan School of Public Health"},
+ {id:"r60",e:"💫",f:["Cada vez que comes, ","estás votando"," por el tipo de mundo que quieres. Tres veces al día, tienes el poder de cambiarlo todo."],q:"\"Tu tenedor es tu arma más poderosa.\" — anónimo"},
+,
+ {id:"r61",e:"🌊",f:["Los océanos absorben el ","30% del CO₂"," que producen los humanos. Sin ellos, ya estaríamos a 50°C."],q:"— NOAA, National Oceanic Atmospheric Administration"},
+ {id:"r62",e:"🐋",f:["Una sola ballena grande captura ","33 toneladas de CO₂"," durante su vida. Un árbol captura solo 22kg al año."],q:"— Fondo Monetario Internacional, 2019"},
+ {id:"r63",e:"🌿",f:["El plancton oceánico produce entre el ","50% y el 80% del oxígeno mundial",". Más que todos los bosques juntos."],q:"— National Geographic, ciencia oceánica"},
+ {id:"r64",e:"💀",f:["Microplásticos del pescado encontrados en ","sangre, pulmones y placenta humana"," en el 80% de las personas estudiadas."],q:"— Environment International Journal, 2022"},
+ {id:"r65",e:"🦈",f:["Cada año matamos ","100 millones de tiburones",". Los tiburones existían antes que los árboles. Pueden desaparecer en una generación."],q:"— Universidad de Dalhousie, estudio marino"},
+ {id:"r66",e:"🌡️",f:["El IPCC concluyó que ","cambiar a dieta basada en plantas"," es una de las acciones individuales más efectivas contra el cambio climático."],q:"— IPCC Climate Report, 2019"},
+ {id:"r67",e:"🌍",f:["La ganadería ocupa el ","83% de la tierra agrícola"," pero produce solo el 18% de las calorías. Es el peor uso de recursos posible."],q:"— Universidad de Oxford, Joseph Poore, 2018"},
+ {id:"r68",e:"🏞️",f:["La deforestación de la Amazonia es en un ","91% para ganadería"," y soja para alimentar ganado. No para tu mesa directamente, sino para la carne."],q:"— Yale School of the Environment"},
+ {id:"r69",e:"🩺",f:["The China Study siguió a ","880 millones de chinos"," durante décadas. La conclusión: a más alimentos vegetales, menos cáncer, diabetes y enfermedad cardíaca."],q:"— Dr. T. Colin Campbell, Universidad Cornell"},
+ {id:"r70",e:"🧓",f:["En las Blue Zones (lugares donde la gente vive 100+ años) la dieta es ","95% vegetal",". Okinawa, Loma Linda, Cerdeña, Nicoya, Ikaria."],q:"— Estudio National Geographic, Dan Buettner"},
+ {id:"r71",e:"💉",f:["El 80% de los antibióticos del mundo se dan al ","ganado, no a los humanos",". Es la principal causa de bacterias resistentes."],q:"— Organización Mundial de la Salud"},
+ {id:"r72",e:"🥩",f:["Una hamburguesa de ternera produce ","tanto CO₂ como conducir 26 km",". Una de seitán produce ","el equivalente a 0,5 km",". 50 veces menos."],q:"— Universidad de Michigan, 2021"},
+ {id:"r73",e:"🐔",f:["Cada año matamos ","70.000 millones de pollos","— casi 9 por persona del planeta. Sus vidas duran 35 días en promedio."],q:"— FAOSTAT, datos globales"},
+ {id:"r74",e:"🌎",f:["Si todo el mundo siguiera dieta vegana, podríamos liberar tierra equivalente a ","África entera"," y reforestar el planeta."],q:"— Universidad de Oxford"},
+ {id:"r75",e:"🏃‍♀️",f:["Hannah Teter, ","medallista olímpica de oro"," en snowboard, es vegana. \"Me siento más limpia, más rápida, más conectada.\""],q:"— Hannah Teter, Juegos Olímpicos"},
+ {id:"r76",e:"🏄‍♂️",f:["Tia Blanco, ","campeona mundial de surf",", es vegana desde los 8 años. \"Mis padres me enseñaron que el cuerpo es un templo.\""],q:"— Tia Blanco, ISA World Surfing Champion"},
+ {id:"r77",e:"💪",f:["Frank Medrano, calistenia extrema, ","100% vegano",". Sus vídeos tienen cientos de millones de visitas. \"La fuerza viene de las plantas.\""],q:"— Frank Medrano, calistenia"},
+ {id:"r78",e:"⚗️",f:["The Lancet Planetary Health Diet propone una dieta global. Conclusión: ","reducir carne un 90%"," y duplicar legumbres salvaría 11 millones de vidas/año."],q:"— EAT-Lancet Commission, 2019"},
+ {id:"r79",e:"🦷",f:["Los humanos tenemos sistema digestivo de ","frugívoro y herbívoro",": intestinos largos, dientes planos, saliva alcalina. Los carnívoros tienen lo opuesto."],q:"— Dr. Milton Mills, anatomía comparada"},
+ {id:"r80",e:"🌳",f:["Para producir 1kg de ternera se necesitan ","12kg de cereal y soja",". Se podría alimentar a 12 personas con esos cereales en lugar de a 1 con la carne."],q:"— FAO, eficiencia alimentaria"},
+ {id:"r81",e:"❄️",f:["El Ártico está perdiendo ","12% del hielo cada década",". El metano de la ganadería es 28 veces más potente que el CO₂."],q:"— NASA, Climate Change Report"},
+ {id:"r82",e:"🍃",f:["\"Lo que no se puede hacer con amor y respeto, ","no debería hacerse en absoluto",".\""],q:"— Mahatma Gandhi"},
+ {id:"r83",e:"🐮",f:["Una vaca lechera produce ","8 veces más leche"," de lo que necesita su cría. Está siempre embarazada o pariendo. Vive 5 años en vez de 20."],q:"— Datos veterinarios, industria láctea"},
+ {id:"r84",e:"🧪",f:["El Estudio Adventista siguió a ","96.000 personas durante años","en. Los veganos tienen 32% menos riesgo cardiovascular y viven 9 años más."],q:"— Adventist Health Study-2, Loma Linda"},
+ {id:"r85",e:"🌐",f:["Si cada persona del mundo dejara la carne 1 día a la semana, sería como ","quitar 240 millones de coches"," de circulación durante un año."],q:"— Environmental Defense Fund"},
+ {id:"r86",e:"🥬",f:["Un solo huevo industrial cuesta a una gallina ","6 horas de su tiempo",", calcio de sus huesos y una vida en jaula de tamaño A4. Pone 300 al año en lugar de 12."],q:"— Industry Welfare Reports"},
+ {id:"r87",e:"💎",f:["\"Los animales del mundo existen por sus propias razones. ","No fueron creados para los humanos","\""],q:"— Alice Walker, Premio Pulitzer"},
+ {id:"r88",e:"🎤",f:["Beyoncé y Jay-Z, Ariana Grande, Stevie Wonder, Pamela Anderson, Joaquin Phoenix, Natalie Portman, Russell Brand. ","Las voces más influyentes ya eligieron","."],q:"— Famosos veganos, lista creciente"},
+ {id:"r89",e:"🏥",f:["La Universidad de Harvard recomienda la dieta basada en plantas como ","la mejor para reducir todas las causas de mortalidad","."],q:"— Harvard T.H. Chan School of Public Health"},
+ {id:"r90",e:"🌿",f:["\"Si los mataderos tuvieran paredes de cristal, ","todo el mundo sería vegetariano",".\""],q:"— Paul McCartney, The Beatles"},
+ {id:"r91",e:"🌊",f:["Las algas captan ","20 veces más CO₂"," que los bosques tropicales. Restaurar océanos vegetales es urgente."],q:"— UNESCO, ciencia oceánica"},
+ {id:"r92",e:"🦠",f:["La gripe aviar, gripe porcina, COVID, vaca loca, sarampión... ","todas pandemias humanas vienen de la ganadería intensiva","."],q:"— OMS, zoonosis y salud pública"},
+ {id:"r93",e:"💰",f:["Si la ganadería pagara por su impacto ambiental real, una hamburguesa costaría ","12€ y un filete 35€",". Subvencionamos su destrucción con impuestos."],q:"— True Cost Initiative, 2020"},
+ {id:"r94",e:"🌟",f:["Lewis Hamilton, ","7 mundiales de Fórmula 1",", invierte en startups veganas. \"Lo siento como mi misión personal.\""],q:"— Lewis Hamilton, Forbes 2023"},
+ {id:"r95",e:"🐰",f:["La industria cosmética testa en ","500.000 conejos al año"," en la UE para productos NO esenciales. Las marcas veganas no testan en animales."],q:"— Cruelty Free International"},
+ {id:"r96",e:"🌋",f:["El gas metano del ganado equivale a las emisiones de ","32 volcanes Krakatoa al año","en. Pero a las vacas no las podemos apagar."],q:"— Penn State University, climatología"},
+ {id:"r97",e:"⚖️",f:["\"Pensar es fácil. Actuar es difícil. ","Pero actuar como pensamos es lo más difícil de todo","\""],q:"— Johann Wolfgang von Goethe"},
+ {id:"r98",e:"🌏",f:["Si los humanos somos solo el 0,01% de la biomasa pero hemos eliminado el ","83% de mamíferos salvajes",", ¿quién es la verdadera plaga del planeta?"],q:"— PNAS, biomasa global"},
+ {id:"r99",e:"💫",f:["Has llegado lejos. Pero esto es solo el principio. La transformación real ocurre cuando ","cambias lo que comes",", cambias quién eres."],q:"— Tu propio camino"},
+ {id:"r100",e:"🎬",f:["Has llegado al final... por ahora. ","¿Quieres seguir aprendiendo?"," En la sección **Más → Documentales y Canales** tienes contenido que cambiará tu visión del mundo. Pulsa el botón ▶ para ir directamente."],q:"— Tu próximo paso"}
 ];
+
+
 // 📌 NOVEDADES — edita aquí para añadir nuevos productos o anuncios
 const NOVEDADES = [];
 // ── EMPEZAR SIN MIEDO ──
@@ -580,6 +530,28 @@ const S = {
  bk:(c="rgba(255,255,255,0.55)")=>({ color:c,fontSize:13,cursor:"pointer",marginBottom:8,display:"inline-flex",alignItems:"center",gap:4 }),btn:(bg,c,r=12,p="12px 16px")=>({ border:"none",cursor:"pointer",fontFamily:"system-ui",background:bg,color:c,borderRadius:r,padding:p,fontSize:14,fontWeight:600 }),
 };
 const APP_URL = "https://heroesveganos.app";
+
+// 📲 PWA Install
+const isIos = () => /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
+const isInStandaloneMode = () => window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone;
+
+// 🎆 Confetti ligero para novedades nuevas
+const lanzarConfetti = () => {
+ const script = document.getElementById("confetti-script");
+ const fire = () => {
+  if (window.confetti) {
+   window.confetti({ particleCount:120, spread:80, origin:{y:0.5}, colors:["#8FBC4A","#E8B84B","#4A7C2F","#C8983B","#ffffff"] });
+   setTimeout(() => window.confetti({ particleCount:60, spread:120, origin:{y:0.3}, colors:["#8FBC4A","#E8B84B","#ffffff"] }), 300);
+  }
+ };
+ if (!window.confetti) {
+  const s = document.createElement("script");
+  s.id = "confetti-script";
+  s.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js";
+  s.onload = fire;
+  document.head.appendChild(s);
+ } else { fire(); }
+};
 const APP_TAGLINE = "La manera más fácil de ser un héroe hoy en día.";
 function calcImpacto(dias) {
  return {
@@ -588,17 +560,22 @@ function calcImpacto(dias) {
 }
 export default function App() {
  const [onboarded,setOnboarded]  = useState(false);
- const [registered,setRegistered]  = useState(false);
- const [regStep,setRegStep]  = useState(1);
- const [regName,setRegName]  = useState("");
- const [yaEsVegano,setYaEsVegano]  = useState(null);
- const [fechaVegano,setFechaVegano] = useState("");
+ // Load from localStorage on startup - fixes "forgot who I am" bug
+ const _ls = k => { try { return localStorage.getItem(k); } catch(e) { return null; } };
+ const _lss = (k,v) => { try { localStorage.setItem(k,v); } catch(e) {} };
+ const [registered,setRegistered]  = useState(() => _ls("hv_reg") === "1");
+ const [regStep,setRegStep]  = useState(0);
+ const [deferredPrompt,setDeferredPrompt]  = useState(null);
+ const [showInstallIos,setShowInstallIos]  = useState(false);
+ const [regName,setRegName]  = useState(() => _ls("hv_name") || "");
+ const [yaEsVegano,setYaEsVegano]  = useState(() => { const v=_ls("hv_vegano"); return v===null?null:v==="1"; });
+ const [fechaVegano,setFechaVegano] = useState(() => _ls("hv_fecha") || "");
  const [screen,setScreen]  = useState("home");
  const [catIdx,setCatIdx]  = useState(0);
  const [platoSel,setPlatoSel]  = useState(null);
  const [recSearch,setRecSearch]  = useState("");
  const [superSel,setSuperSel]  = useState(null);
- const [revIdx,setRevIdx]  = useState(0);
+ const [revIdx,setRevIdx]  = useState(() => { const v=parseInt(_ls("hv_revidx")||"0"); return isNaN(v)?0:v; });
  const [vistosNov,setVistosNov]  = useState([]);
  const [impMode,setImpMode]  = useState("sld");
  const [causa,setCausa]  = useState(0);
@@ -607,10 +584,18 @@ export default function App() {
  const [apoyaOk,setApoyaOk]  = useState(false);
  const [dudaOpen,setDudaOpen]  = useState(null);
  const [compraSemOpen,setCompraSemOpen] = useState(false);
- const [carIdx,setCarIdx]  = useState(0);
+ const [carIdx,setCarIdx]  = useState(() => { const v=parseInt(_ls("hv_caridx")||"0"); return isNaN(v)?0:v; });
  const [mantraPlaying,setMantraPlaying] = useState(false);
  const [mantraShown,setMantraShown]  = useState(false);
  const [mantraTooltip,setMantraTooltip] = useState(false);
+ // PWA Install prompt listener
+ if (typeof window !== "undefined" && !deferredPrompt) {
+  window.addEventListener("beforeinstallprompt", (e) => {
+   e.preventDefault();
+   setDeferredPrompt(e);
+  }, { once: true });
+ }
+
  // Compute days as vegan
  const diasVegano = (() => {
  if (!registered) return 30;
@@ -725,7 +710,7 @@ export default function App() {
  </div>
  <div style={{color:"white",fontSize:14,fontWeight:700,marginBottom:3}}>{card.data.titulo}</div>
  <div style={{color:"rgba(255,255,255,0.55)",fontSize:12,marginBottom:10}}>{card.data.desc}</div>
- <button onClick={()=>{ setVistosNov(p=>[...p,card.data.id]); setCarIdx(c=>Math.max(0,c-1)); }} style={{...S.btn("rgba(255,255,255,0.1)","rgba(255,255,255,0.6)",8,"6px 12px"),fontSize:11}}>Visto ✓</button>
+ <button onClick={()=>{ setVistosNov(p=>[...p,card.data.id]); setCarIdx(c=>{ const n=Math.max(0,c-1); _lss("hv_caridx",String(n)); return n; }); }} style={{...S.btn("rgba(255,255,255,0.1)","rgba(255,255,255,0.6)",8,"6px 12px"),fontSize:11}}>Visto ✓</button>
  </>
  )}
  {card.tipo==="revelacion"&&(
@@ -736,19 +721,25 @@ export default function App() {
  {card.data.f.map((t,i)=>i%2===0?<span key={i}>{t}</span>:<span key={i} style={{color:"#E8B84B"}}>{t}</span>)}
  </div>
  <div style={{color:"rgba(255,255,255,0.5)",fontSize:11,lineHeight:1.4,fontStyle:"italic",textAlign:"center",marginBottom:6}}>{card.data.q}</div>
- <button onClick={()=>shareRev(card.data)} style={{...S.btn("rgba(143,188,74,0.15)","#8FBC4A",8,"6px 12px"),width:"100%",fontSize:11,display:"flex",alignItems:"center",gap:6,justifyContent:"center",border:"1px solid rgba(143,188,74,0.2)"}}>
- 🌱 Compartir
- </button>
+ {card.data.id==="r100" ? (
+  <button onClick={()=>go("mas")} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a",10,"10px 12px"),width:"100%",fontSize:13,fontWeight:700,display:"flex",alignItems:"center",gap:8,justifyContent:"center",marginTop:4}}>
+   ▶ Ir a Documentales y Canales
+  </button>
+ ) : (
+  <button onClick={()=>shareRev(card.data)} style={{...S.btn("rgba(143,188,74,0.15)","#8FBC4A",8,"6px 12px"),width:"100%",fontSize:11,display:"flex",alignItems:"center",gap:6,justifyContent:"center",border:"1px solid rgba(143,188,74,0.2)"}}>
+   🌱 Compartir
+  </button>
+ )}
  </>
  )}
  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginTop:10}}>
- <button onClick={()=>setCarIdx(c=>Math.max(0,c-1))} style={{...S.btn("rgba(255,255,255,0.07)","rgba(255,255,255,0.5)",8,"4px 10px"),fontSize:14,opacity:carIdx===0?0.3:1}}>‹</button>
+ <button onClick={()=>setCarIdx(c=>{ const n=Math.max(0,c-1); _lss("hv_caridx",String(n)); return n; })} style={{...S.btn("rgba(255,255,255,0.07)","rgba(255,255,255,0.5)",8,"4px 10px"),fontSize:14,opacity:carIdx===0?0.3:1}}>‹</button>
  <div style={{display:"flex",gap:3,flexWrap:"wrap",justifyContent:"center",maxWidth:160}}>
  {carousel.map((_,i)=>(
- <div key={i} onClick={()=>setCarIdx(i)} style={{width:i===carIdx?12:4,height:4,borderRadius:2,background:i===carIdx?"#8FBC4A":"rgba(255,255,255,0.2)",cursor:"pointer",transition:"all 0.3s"}}></div>
+ <div key={i} onClick={()=>{ _lss("hv_caridx",String(i)); setCarIdx(i); }} style={{width:i===carIdx?12:4,height:4,borderRadius:2,background:i===carIdx?"#8FBC4A":"rgba(255,255,255,0.2)",cursor:"pointer",transition:"all 0.3s"}}></div>
  ))}
  </div>
- <button onClick={()=>setCarIdx(c=>Math.min(carousel.length-1,c+1))} style={{...S.btn("rgba(255,255,255,0.07)","rgba(255,255,255,0.5)",8,"4px 10px"),fontSize:14,opacity:carIdx===carousel.length-1?0.3:1}}>›</button>
+ <button onClick={()=>setCarIdx(c=>{ const n=c+1>=carousel.length?1:c+1; _lss("hv_caridx",String(n)); const nc=carousel[n]; if(nc&&nc.tipo==="novedad"&&!vistosNov.includes(nc.data.id)){setVistosNov(v=>[...v,nc.data.id]);lanzarConfetti();} return n; })} style={{...S.btn("rgba(255,255,255,0.07)","rgba(255,255,255,0.5)",8,"4px 10px"),fontSize:14,opacity:1}}>›</button>
  </div>
  </div>
  <div style={{fontSize:14,fontWeight:700,color:"#2D5016",marginBottom:9}}>¿Qué quieres hacer hoy?</div>
@@ -1343,7 +1334,39 @@ export default function App() {
  if (!registered) return (
  <div style={{background:"#111",minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"system-ui,-apple-system,sans-serif"}}>
  <div style={{width:360,background:"#FDFCFA",borderRadius:28,padding:"36px 28px",boxShadow:"0 30px 60px rgba(0,0,0,0.8)"}}>
- {regStep === 1 ? (
+ {regStep === 0 ? (
+ <>
+  <div style={{textAlign:"center",marginBottom:16}}>
+   <div style={{fontSize:52,marginBottom:8}}>🛡️</div>
+   <div style={{fontSize:22,fontWeight:900,color:"#2D5016",lineHeight:1.2,marginBottom:10}}>Héroes Veganos</div>
+   <div style={{fontSize:13,color:"#555",lineHeight:1.65,marginBottom:18}}>
+    La manera más fácil de ser un héroe hoy en día.<br/><br/>
+    Todo lo que haces a los demás, te lo haces a ti. Esta app te da las herramientas para que dar el paso sea sencillo, claro y posible para cualquiera.<br/><br/>
+    <strong style={{color:"#2D5016"}}>Recetas. Productos. Dudas resueltas. Tu impacto en tiempo real.</strong><br/><br/>
+    Gratis. Sin registro complicado. En tu móvil siempre contigo.
+   </div>
+  </div>
+  {/* Botón instalar Android */}
+  {deferredPrompt && (
+   <button onClick={async ()=>{ deferredPrompt.prompt(); const r=await deferredPrompt.userChoice; if(r.outcome==="accepted"){setDeferredPrompt(null);} }} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a"),width:"100%",fontSize:14,padding:"13px",borderRadius:12,marginBottom:10,fontWeight:700}}>
+    📲 Instalar app en tu móvil
+   </button>
+  )}
+  {/* Tutorial iOS */}
+  {isIos() && !isInStandaloneMode() && (
+   <div style={{background:"rgba(45,80,22,0.06)",border:"1px solid rgba(45,80,22,0.2)",borderRadius:12,padding:"12px 14px",marginBottom:12,fontSize:12,color:"#2D5016",lineHeight:1.6}}>
+    📲 <strong>Para instalarla en tu iPhone:</strong><br/>
+    1. Pulsa el botón <strong>Compartir ⬆️</strong> de Safari<br/>
+    2. Toca <strong>"Añadir a pantalla de inicio"</strong><br/>
+    3. Confirma con <strong>"Añadir"</strong>
+   </div>
+  )}
+  <button onClick={()=>setRegStep(1)} style={{...S.btn("linear-gradient(135deg,#2D5016,#4A7C2F)","white"),width:"100%",fontSize:15,padding:"14px",borderRadius:12}}>
+   ¡Quiero ser un Héroe! 🛡️
+  </button>
+  <div style={{textAlign:"center",marginTop:10,fontSize:11,color:"#ccc"}}>La app es 100% gratuita y no requiere registro de email</div>
+ </>
+ ) : regStep === 1 ? (
  <>
  <div style={{fontSize:36,marginBottom:12,textAlign:"center"}}>👋</div>
  <div style={{fontSize:22,fontWeight:800,color:"#2D5016",marginBottom:6,textAlign:"center"}}>¿Cómo te llamas?</div>
@@ -1384,6 +1407,10 @@ export default function App() {
  onClick={()=>{
  if(yaEsVegano===null) return;
  if(yaEsVegano && !fechaVegano) return;
+ _lss("hv_reg","1");
+ _lss("hv_name",regName);
+ _lss("hv_vegano",yaEsVegano?"1":"0");
+ _lss("hv_fecha",fechaVegano);
  setRegistered(true);
  }}
  style={{...S.btn("linear-gradient(135deg,#2D5016,#4A7C2F)","white"),width:"100%",fontSize:15,padding:"14px",borderRadius:12,opacity:(yaEsVegano===null||(yaEsVegano&&!fechaVegano))?0.4:1}}
