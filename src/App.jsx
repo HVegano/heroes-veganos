@@ -567,7 +567,7 @@ function calcImpacto(dias) {
  };
 }
 export default function App() {
- const [onboarded,setOnboarded]  = useState(false);
+
  // Load from localStorage on startup - fixes "forgot who I am" bug
  const _ls = k => { try { return localStorage.getItem(k); } catch(e) { return null; } };
  const _lss = (k,v) => { try { localStorage.setItem(k,v); } catch(e) {} };
@@ -1348,60 +1348,56 @@ export default function App() {
  );
  const screens = { home:<HomeScreen/>, rec:<RecScreen/>, cmp:<CmpScreen/>, apoya:<ApoyaScreen/>, mas:<MasScreen/>, plato:<PlatoScreen/>, esm:<EsmScreen/> };
  // ── ONBOARDING ──────────────────────────────────────────────────────────────
- if (!onboarded) return (
- <div style={{background:"#111",minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"system-ui,-apple-system,sans-serif"}}>
- <div style={{width:360,background:"linear-gradient(160deg,#111e07,#2D5016 60%,#3d6b1e)",borderRadius:28,padding:"40px 28px",boxShadow:"0 30px 60px rgba(0,0,0,0.8)",textAlign:"center"}}>
- <div style={{fontSize:56,marginBottom:16}}>🛡️</div>
- <div style={{color:"#E8B84B",fontSize:12,fontWeight:700,letterSpacing:3,textTransform:"uppercase",marginBottom:8}}>Bienvenido a</div>
- <div style={{color:"white",fontSize:32,fontWeight:900,marginBottom:4}}>Héroes Veganos</div>
- <div style={{color:"rgba(255,255,255,0.75)",fontSize:17,fontWeight:700,lineHeight:1.5,marginBottom:12}}>
- La manera más fácil de ser un héroe.
- </div>
- <div style={{color:"rgba(255,255,255,0.55)",fontSize:13,lineHeight:1.75,marginBottom:30}}>
- Esta app te facilita y mejora la vida a la vez que cuidas del planeta. Encontrarás recetas veganas,dónde comprar productos veganos,revelaciones que inspiran,turismo vegano,tu impacto positivo en tiempo real y mucho más.
- </div>
- <button onClick={()=>setOnboarded(true)} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a"),width:"100%",fontSize:16,padding:"15px",borderRadius:14,fontWeight:800}}>
- Quiero ser un Héroe 🌱
- </button>
- <div style={{color:"rgba(255,255,255,0.25)",fontSize:11,marginTop:12}}>{APP_URL}</div>
- </div>
- </div>
- );
- // ── REGISTRO ────────────────────────────────────────────────────────────────
+ // ── BIENVENIDA + REGISTRO (pantalla única verde) ─────────────────────────────
  if (!registered) return (
- <div style={{background:"#111",minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"system-ui,-apple-system,sans-serif"}}>
- <div style={{width:360,background:"#FDFCFA",borderRadius:28,padding:"36px 28px",boxShadow:"0 30px 60px rgba(0,0,0,0.8)"}}>
+ <div style={{background:"#0a0f06",minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"20px 16px",fontFamily:"system-ui,-apple-system,sans-serif",overflowY:"auto"}}>
+ <div style={{width:"100%",maxWidth:400,background:"linear-gradient(160deg,#111e07,#2D5016 60%,#3d6b1e)",borderRadius:28,padding:"36px 24px",boxShadow:"0 30px 60px rgba(0,0,0,0.8)",textAlign:"center"}}>
  {regStep === 0 ? (
  <>
-  <div style={{textAlign:"center",marginBottom:16}}>
-   <div style={{fontSize:52,marginBottom:8}}>🛡️</div>
-   <div style={{fontSize:22,fontWeight:900,color:"#2D5016",lineHeight:1.2,marginBottom:10}}>Héroes Veganos</div>
-   <div style={{fontSize:13,color:"#555",lineHeight:1.65,marginBottom:18}}>
-    La manera más fácil de ser un héroe hoy en día.<br/><br/>
-    Todo lo que haces a los demás, te lo haces a ti. Esta app te da las herramientas para que dar el paso sea sencillo, claro y posible para cualquiera.<br/><br/>
-    <strong style={{color:"#2D5016"}}>Recetas. Productos. Dudas resueltas. Tu impacto en tiempo real.</strong><br/><br/>
-    Gratis. Sin registro complicado. En tu móvil siempre contigo.
-   </div>
+  <div style={{fontSize:56,marginBottom:10}}>🛡️</div>
+  <div style={{color:"#E8B84B",fontSize:11,fontWeight:700,letterSpacing:3,textTransform:"uppercase",marginBottom:6}}>Bienvenido a</div>
+  <div style={{color:"white",fontSize:28,fontWeight:900,marginBottom:10}}>Héroes Veganos</div>
+  <div style={{color:"rgba(255,255,255,0.8)",fontSize:15,fontWeight:700,lineHeight:1.5,marginBottom:12}}>
+   La manera más inteligente de cuidarte y cuidar el planeta.
   </div>
-  {/* Botón instalar Android */}
+  <div style={{color:"rgba(255,255,255,0.55)",fontSize:12,lineHeight:1.75,marginBottom:20,textAlign:"left"}}>
+   La ciencia lo confirma: las plantas reducen el riesgo de cientos de enfermedades y dan más energía y años de vida. Los atletas de élite lo hacen. Los pueblos más longevos del mundo lo hacen. <strong style={{color:"rgba(255,255,255,0.8)"}}>Ahora esta app te lo pone tan fácil que no hay excusa.</strong><br/><br/>
+   🍽️ Recetas deliciosas y fáciles<br/>
+   🛒 Dónde comprar en tu super habitual<br/>
+   💚 Tu impacto real en tiempo real<br/>
+   📲 Novedades y productos cuando salen<br/>
+   🌱 Guía para empezar sin miedo<br/><br/>
+   <span style={{color:"rgba(255,255,255,0.35)"}}>Gratis. Sin email. Siempre en tu móvil.</span>
+  </div>
+  <div style={{color:"white",fontSize:16,fontWeight:900,marginBottom:12,lineHeight:1.3}}>¡Quiero ser un Héroe! 🛡️</div>
+  {/* Android: botón instalar */}
   {deferredPrompt && (
-   <button onClick={async ()=>{ deferredPrompt.prompt(); const r=await deferredPrompt.userChoice; if(r.outcome==="accepted"){setDeferredPrompt(null);} }} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a"),width:"100%",fontSize:14,padding:"13px",borderRadius:12,marginBottom:10,fontWeight:700}}>
+   <>
+   <button onClick={async ()=>{ deferredPrompt.prompt(); const r=await deferredPrompt.userChoice; if(r.outcome==="accepted"){setDeferredPrompt(null);} }} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a"),width:"100%",fontSize:14,padding:"14px",borderRadius:12,marginBottom:8,fontWeight:800}}>
     📲 Instalar app en tu móvil
    </button>
+   <button onClick={()=>setRegStep(1)} style={{background:"transparent",border:"none",color:"rgba(255,255,255,0.3)",fontSize:11,textDecoration:"underline",cursor:"pointer",width:"100%",padding:"6px",fontFamily:"system-ui"}}>Continuar en el navegador →</button>
+   </>
   )}
-  {/* Tutorial iOS */}
+  {/* iPhone: guía */}
   {isIos() && !isInStandaloneMode() && (
-   <div style={{background:"rgba(45,80,22,0.06)",border:"1px solid rgba(45,80,22,0.2)",borderRadius:12,padding:"12px 14px",marginBottom:12,fontSize:12,color:"#2D5016",lineHeight:1.6}}>
-    📲 <strong>Para instalarla en tu iPhone:</strong><br/>
-    1. Pulsa el botón <strong>Compartir ⬆️</strong> de Safari<br/>
-    2. Toca <strong>"Añadir a pantalla de inicio"</strong><br/>
-    3. Confirma con <strong>"Añadir"</strong>
+   <>
+   <div style={{background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.15)",borderRadius:12,padding:"12px 14px",marginBottom:8,fontSize:12,color:"rgba(255,255,255,0.7)",lineHeight:1.7,textAlign:"left"}}>
+    📲 <strong style={{color:"white"}}>Instalar en iPhone:</strong><br/>
+    1. Pulsa <strong style={{color:"#E8B84B"}}>Compartir ⬆️</strong> en Safari<br/>
+    2. Toca <strong style={{color:"#E8B84B"}}>"Añadir a pantalla de inicio"</strong><br/>
+    3. Confirma con <strong style={{color:"#E8B84B"}}>"Añadir"</strong>
    </div>
+   <button onClick={()=>setRegStep(1)} style={{background:"transparent",border:"none",color:"rgba(255,255,255,0.3)",fontSize:11,textDecoration:"underline",cursor:"pointer",width:"100%",padding:"6px",fontFamily:"system-ui"}}>Continuar en el navegador →</button>
+   </>
   )}
-  <button onClick={()=>setRegStep(1)} style={{...S.btn("linear-gradient(135deg,#2D5016,#4A7C2F)","white"),width:"100%",fontSize:15,padding:"14px",borderRadius:12}}>
-   ¡Quiero ser un Héroe! 🛡️
-  </button>
-  <div style={{textAlign:"center",marginTop:10,fontSize:11,color:"#ccc"}}>La app es 100% gratuita y no requiere registro de email</div>
+  {/* Si no es ni iOS ni Android con prompt: botón directo */}
+  {!deferredPrompt && !isIos() && (
+   <button onClick={()=>setRegStep(1)} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a"),width:"100%",fontSize:15,padding:"14px",borderRadius:12,fontWeight:800}}>
+    Empezar →
+   </button>
+  )}
+  <div style={{color:"rgba(255,255,255,0.18)",fontSize:10,marginTop:10}}>{APP_URL}</div>
  </>
  ) : regStep === 1 ? (
  <>
