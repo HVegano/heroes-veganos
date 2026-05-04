@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const REVELACIONES = [
  {id:"r1",e:"💧",f:["Producir ","1 kg de ternera"," consume tanta agua como ducharse durante ","6 meses"],q:"\"Lo que haces a la naturaleza, te lo haces a ti mismo.\""},
  {id:"r2",e:"🌍",f:["Si el mundo adoptara una dieta vegana, reduciríamos las emisiones de gases de efecto invernadero relacionadas con la alimentación en un ","70%"],q:"— Estudio Universidad de Oxford, 2016"},
@@ -108,14 +108,22 @@ const REVELACIONES = [
 const NOVEDADES = [];
 // ── EMPEZAR SIN MIEDO ──
 const DUDAS = [
- { id:"q1",e:"💪",q:"¿De dónde sacaré la proteína?",a:"De legumbres,tofu,tempeh,seitán,frutos secos y semillas. Lentejas: 9g/100g cocidas. Tofu: 17g. Garbanzos: 19g.\n\nLewis Hamilton (7 mundiales F1),Djokovic (2…" },
- { id:"q2",e:"💊",q:"¿Necesito tomar suplementos?",a:"Para más tranquilidad y comodidad,un suplemento de B12 es la opción más fácil — barato,una toma a la semana y listo.\n\nA medida que avances irás conociendo …" },
- { id:"q3",e:"⚡",q:"¿Tendré energía suficiente?",a:"Sí, y muchas personas reportan más energía que antes. Sin la carga digestiva de procesar carne,el cuerpo dedica esa energía a regenerarse.\n\nUn estudio de S…" },
- { id:"q4",e:"💶",q:"¿Es más caro?",a:"No,suele ser más barato. La base de la dieta vegana son los alimentos más económicos del supermercado:\n\n• 1kg de lentejas: 1,50€\n• 1kg de pollo: 8€\n• 500…" },
- { id:"q5",e:"🍽️",q:"¿Qué tengo que comer durante la semana?",a:"Tranquilidad: lo importante es lo que comes durante la semana,no la perfección de cada comida.\n\nQue a lo largo de la semana aparezcan: legumbres o tofu (ca…" },
- { id:"q6",e:"👨‍👩‍👧",q:"¿Mis hijos pueden ser veganos?",a:"Sí, totalmente. Y muchas familias lo hacen sin problema desde el embarazo.\n\nLa Asociación Americana de Dietética y la Academia Española de Nutrición confir…" },
- { id:"q7",e:"🍴",q:"¿Y cuando coma fuera de casa?",a:"Cada vez es más fácil. La mayoría de restaurantes tienen al menos una opción vegana o pueden adaptar un plato. Pizzerías,asiáticos,mexicanos,italianos,libane…" },
- { id:"q8",e:"🤔",q:"¿Es muy complicado?",a:"Al principio parece,pero en 2-3 semanas se vuelve automático. Tu cerebro aprende rápido las nuevas opciones y dejas de pensar.\n\nVe a tu ritmo. Solo tú sabe…" },
+ { id:"q1",e:"💪",q:"¿De dónde sacaré la proteína?",
+   a:"De legumbres, tofu, tempeh, seitán, frutos secos y semillas. Las lentejas tienen 9g por cada 100g cocidas. El tofu, 17g. Los garbanzos, 19g. Si comes legumbre o tofu en cada comida principal, vas sobrado.\n\nLewis Hamilton (7 mundiales de F1), Novak Djokovic (24 Grand Slams) y Mike Tyson son veganos. La proteína vegetal funciona — y muchas veces, incluso mejor." },
+ { id:"q2",e:"💊",q:"¿Necesito tomar suplementos?",
+   a:"Para más tranquilidad y comodidad, un suplemento de B12 es la opción más fácil — barato, una toma a la semana y listo.\n\nA medida que avances irás conociendo otras fuentes naturales muy interesantes como la chlorella, el alga nori, alimentos fortificados (leches vegetales, levadura nutricional) y otros que iremos descubriendo juntos.\n\nLo importante: que no te falte. Como sea que decidas hacerlo." },
+ { id:"q3",e:"⚡",q:"¿Tendré energía suficiente?",
+   a:"Sí, y muchas personas reportan más energía que antes. Sin la carga digestiva de procesar carne, el cuerpo dedica esa energía a regenerarse.\n\nUn estudio de Stanford con gemelos idénticos (uno vegano, otro omnívoro) demostró que en 8 semanas el gemelo vegano mostraba marcadores de envejecimiento más lentos y menor inflamación.\n\nY si quieres pruebas vivas: Lewis Hamilton, Novak Djokovic, Mike Tyson, Venus Williams… campeones de élite que rinden al máximo siendo veganos.\n\nLa energía no falla — al contrario." },
+ { id:"q4",e:"💶",q:"¿Es más caro?",
+   a:"No, suele ser más barato. La base de la dieta vegana son los alimentos más económicos del supermercado:\n\n• 1kg de lentejas: 1,50€ (= 35 raciones de proteína)\n• 1kg de pollo: 8€ (= 6 raciones)\n• 500g de tofu: 2,50€\n• 500g de ternera: 8€\n\nLos productos veganos procesados (hamburguesas, quesos) son algo más caros, pero son extras, no la base.\n\nY aunque algo fuera más caro… ¿qué es caro de verdad? La salud de tus hijos, los años extra que vivirás, la vida de un animal, el planeta que les dejas. Por no mencionar la elevación de tu alma. Esa inversión es la más barata que harás en tu vida.\n\nComo dijo Leonardo da Vinci: «Llegará el día en que los hombres como yo verán el asesinato de un animal como ahora ven el de un hombre»." },
+ { id:"q5",e:"🍽️",q:"¿Qué tengo que comer durante la semana?",
+   a:"Tranquilidad: lo importante es lo que comes durante la semana, no la perfección de cada comida.\n\nQue a lo largo de la semana aparezcan: legumbres o tofu (casi a diario), un cereal (arroz, pasta, pan), verduras y frutas variadas, y un puñadito de frutos secos o semillas.\n\nEjemplos: lentejas con arroz, garbanzos con cuscús, tofu con pasta, hummus con pan integral.\n\nSi esos grupos están con regularidad, vas sobrado." },
+ { id:"q6",e:"👨‍👩‍👧",q:"¿Mis hijos pueden ser veganos?",
+   a:"Sí, totalmente. Y muchas familias lo hacen sin problema desde el embarazo.\n\nLa Asociación Americana de Dietética y la Academia Española de Nutrición confirman que una dieta vegana bien planificada es saludable en todas las etapas de la vida, incluyendo infancia y adolescencia.\n\nLas claves: B12 suplementada, suficientes calorías, variedad de alimentos y, si es posible, un pediatra que conozca el tema." },
+ { id:"q7",e:"🍴",q:"¿Y cuando coma fuera de casa?",
+   a:"Cada vez es más fácil. La mayoría de restaurantes tienen al menos una opción vegana o pueden adaptar un plato. Pizzerías, asiáticos, mexicanos, italianos, libaneses, hindús — todos tienen opciones.\n\nAplicaciones como HappyCow te muestran restaurantes veganos cerca de ti, y una búsqueda rápida en Google (\"restaurante vegano + tu ciudad\") te sorprenderá: está cambiando todo muy rápido." },
+ { id:"q8",e:"🤔",q:"¿Es muy complicado?",
+   a:"Al principio parece, pero en 2-3 semanas se vuelve automático. Tu cerebro aprende rápido las nuevas opciones y dejas de pensar.\n\nVe a tu ritmo. Solo tú sabes la mejor forma de llegar a tu objetivo. Lo importante es llegar.\n\nEsta app está hecha precisamente para acompañarte: tienes recetas, productos por supermercado, una semana ejemplo y la lista de la compra hecha. No estás solo en este camino." },
 ];
 const PLATO_FACIL = [
  ["🫘","Una proteína","#7A4A8B","Legumbres,tofu,tempeh,seitán,etc."],
@@ -588,13 +596,25 @@ export default function App() {
  const [mantraPlaying,setMantraPlaying] = useState(false);
  const [mantraShown,setMantraShown]  = useState(false);
  const [mantraTooltip,setMantraTooltip] = useState(false);
- // PWA Install prompt listener
- if (typeof window !== "undefined" && !deferredPrompt) {
-  window.addEventListener("beforeinstallprompt", (e) => {
+ // PWA Install prompt listener (correctly wrapped in useEffect)
+ useEffect(() => {
+  const handler = (e) => {
    e.preventDefault();
    setDeferredPrompt(e);
-  }, { once: true });
- }
+  };
+  window.addEventListener("beforeinstallprompt", handler);
+  return () => window.removeEventListener("beforeinstallprompt", handler);
+ }, []);
+
+ // Detectar subida de nivel y lanzar fuegos artificiales
+ useEffect(() => {
+  if (!registered) return;
+  const lastLevel = parseInt(_ls("hv_lastlevel") || "-1");
+  if (nivelIdx > lastLevel) {
+   if (lastLevel >= 0) { lanzarConfetti(); setTimeout(lanzarConfetti, 600); }
+   _lss("hv_lastlevel", String(nivelIdx));
+  }
+ }, [nivelIdx, registered]);
 
  // Compute days as vegan
  const diasVegano = (() => {
@@ -613,8 +633,30 @@ export default function App() {
  anos:  (4.2 * cuerpoP).toFixed(1),energia: Math.round(40 * Math.min(1,diasVegano / 90)),cardio:  Math.round(32 * cuerpoP),diabetes:Math.round(23 * cuerpoP),
  };
  const nombre  = regName || "Miguel";
- const nivel  = diasVegano >= 365 ? "Héroe Leyenda" : diasVegano >= 180 ? "Héroe Luz" : diasVegano >= 90 ? "Héroe Guardián" : diasVegano >= 30 ? "Héroe Semilla" : "Héroe Nuevo";
- const nivelPct = Math.min(100, (diasVegano % 90) / 90 * 100);
+ // Niveles: cada uno tiene un umbral de días. La barra se llena proporcionalmente hasta el siguiente.
+ const NIVELES = [
+  {nm:"Héroe Nuevo",      e:"🌱", d:0},
+  {nm:"Héroe Semilla",    e:"🌿", d:30},
+  {nm:"Héroe Guardián",   e:"⚔️", d:90},
+  {nm:"Héroe Luz",        e:"✨", d:180},
+  {nm:"Héroe Leyenda",    e:"🌟", d:365},
+  {nm:"Héroe Eterno",     e:"🦅", d:730},
+  {nm:"Héroe Iluminado",  e:"👑", d:1825},
+  {nm:"Héroe Maestro",    e:"💫", d:3650},
+ ];
+ const nivelIdx = (() => {
+  for (let i = NIVELES.length - 1; i >= 0; i--) { if (diasVegano >= NIVELES[i].d) return i; }
+  return 0;
+ })();
+ const nivel = NIVELES[nivelIdx].nm;
+ const nivelE = NIVELES[nivelIdx].e;
+ const nivelPct = (() => {
+  if (nivelIdx >= NIVELES.length - 1) return 100; // Maestro = barra completa
+  const actual = NIVELES[nivelIdx].d;
+  const siguiente = NIVELES[nivelIdx + 1].d;
+  return Math.min(100, ((diasVegano - actual) / (siguiente - actual)) * 100);
+ })();
+ const nivelSig = nivelIdx < NIVELES.length - 1 ? NIVELES[nivelIdx + 1] : null;
  const novPendientes = NOVEDADES.filter(n => !vistosNov.includes(n.id));
  const hayNovedad  = novPendientes.length > 0;
  const go = s => setScreen(s);
@@ -651,14 +693,14 @@ export default function App() {
  return (
  <div style={{background:"#F5F0E8",minHeight:"100%"}}>
  <div style={{background:"linear-gradient(160deg,#111e07,#2D5016 60%,#3d6b1e)",padding:"44px 20px 20px"}}>
- <div style={S.sb}><span>9:41</span><span>●●●</span></div>
+ <div style={S.sb}></div>
  <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:14}}>
  <div>
  <div style={{color:"rgba(255,255,255,0.5)",fontSize:12,marginBottom:2}}>Bienvenido,</div>
  <div style={{color:"white",fontSize:22,fontWeight:700}}>{nombre}</div>
  <div style={{display:"inline-flex",alignItems:"center",gap:5,background:"rgba(232,184,75,0.15)",border:"1px solid rgba(232,184,75,0.3)",borderRadius:8,padding:"4px 9px",marginTop:5}}>
  <span style={{fontSize:14}}>🛡️</span>
- <span style={{fontSize:11,fontWeight:700,color:"#E8B84B"}}>{nivel} · Día {diasVegano}</span>
+ <span style={{fontSize:11,fontWeight:700,color:"#E8B84B"}}>{nivelE} {nivel} · Día {diasVegano}</span>
  </div>
  </div>
  <div style={{display:"flex",flexDirection:"column",gap:4,alignItems:"flex-end"}}>
@@ -676,7 +718,7 @@ export default function App() {
  <span style={{color:"#E8B84B",fontSize:16,fontWeight:700}}>{diasVegano} <span style={{fontSize:10,fontWeight:400,color:"rgba(255,255,255,0.35)"}}>días</span></span>
  </div>
  <div style={{color:"rgba(255,255,255,0.35)",fontSize:10,marginBottom:7}}>
- {nivel === "Héroe Leyenda" ? "¡Eres una leyenda viva! 🌟" : `${Math.round(nivelPct)}% hacia el siguiente nivel`}
+ {nivelIdx >= NIVELES.length - 1 ? "¡Has alcanzado el nivel máximo! 💫" : `${Math.round(nivelPct)}% hacia ${nivelSig.e} ${nivelSig.nm}`}
  </div>
  <div style={{background:"rgba(0,0,0,0.3)",borderRadius:6,height:6}}>
  <div style={{width:nivelPct+"%",height:"100%",background:"linear-gradient(90deg,#5a9e20,#8FBC4A,#E8B84B)",borderRadius:6,transition:"width 1s"}}></div>
@@ -716,30 +758,26 @@ export default function App() {
  {card.tipo==="revelacion"&&(
  <>
  <div style={{color:"#8FBC4A",fontSize:10,fontWeight:700,letterSpacing:1.5,textTransform:"uppercase",marginBottom:6}}>💡 Revelación</div>
- <div style={{fontSize:20,marginBottom:4,textAlign:"center"}}>{card.data.e}</div>
- <div style={{color:"white",fontSize:12,fontWeight:700,lineHeight:1.4,marginBottom:3,textAlign:"center"}}>
+ <div style={{fontSize:24,marginBottom:6,textAlign:"center"}}>{card.data.e}</div>
+ <div style={{color:"white",fontSize:15,fontWeight:700,lineHeight:1.5,marginBottom:7,textAlign:"center"}}>
  {card.data.f.map((t,i)=>i%2===0?<span key={i}>{t}</span>:<span key={i} style={{color:"#E8B84B"}}>{t}</span>)}
  </div>
- <div style={{color:"rgba(255,255,255,0.5)",fontSize:11,lineHeight:1.4,fontStyle:"italic",textAlign:"center",marginBottom:6}}>{card.data.q}</div>
- {card.data.id==="r100" ? (
-  <button onClick={()=>go("mas")} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a",10,"10px 12px"),width:"100%",fontSize:13,fontWeight:700,display:"flex",alignItems:"center",gap:8,justifyContent:"center",marginTop:4}}>
-   ▶ Ir a Documentales y Canales
-  </button>
- ) : (
-  <button onClick={()=>shareRev(card.data)} style={{...S.btn("rgba(143,188,74,0.15)","#8FBC4A",8,"6px 12px"),width:"100%",fontSize:11,display:"flex",alignItems:"center",gap:6,justifyContent:"center",border:"1px solid rgba(143,188,74,0.2)"}}>
-   🌱 Compartir
-  </button>
- )}
+ <div style={{color:"rgba(255,255,255,0.6)",fontSize:13,lineHeight:1.5,fontStyle:"italic",textAlign:"center",marginBottom:9}}>{card.data.q}</div>
  </>
  )}
- <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginTop:10}}>
- <button onClick={()=>setCarIdx(c=>{ const n=Math.max(0,c-1); _lss("hv_caridx",String(n)); return n; })} style={{...S.btn("rgba(255,255,255,0.07)","rgba(255,255,255,0.5)",8,"4px 10px"),fontSize:14,opacity:carIdx===0?0.3:1}}>‹</button>
- <div style={{display:"flex",gap:3,flexWrap:"wrap",justifyContent:"center",maxWidth:160}}>
- {carousel.map((_,i)=>(
- <div key={i} onClick={()=>{ _lss("hv_caridx",String(i)); setCarIdx(i); }} style={{width:i===carIdx?12:4,height:4,borderRadius:2,background:i===carIdx?"#8FBC4A":"rgba(255,255,255,0.2)",cursor:"pointer",transition:"all 0.3s"}}></div>
+ <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,marginTop:10}}>
+ <button onClick={()=>setCarIdx(c=>{ const n=Math.max(0,c-1); _lss("hv_caridx",String(n)); return n; })} style={{...S.btn("rgba(255,255,255,0.07)","rgba(255,255,255,0.5)",8,"4px 12px"),fontSize:16,opacity:carIdx===0?0.3:1,flexShrink:0}}>‹</button>
+ {card.tipo==="revelacion" && (card.data.id==="r100" ? (
+  <button onClick={()=>go("mas")} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a",8,"7px 12px"),flex:1,fontSize:12,fontWeight:700,display:"flex",alignItems:"center",gap:6,justifyContent:"center"}}>
+   ▶ Documentales
+  </button>
+ ) : (
+  <button onClick={()=>shareRev(card.data)} style={{...S.btn("rgba(143,188,74,0.15)","#8FBC4A",8,"7px 12px"),flex:1,fontSize:12,display:"flex",alignItems:"center",gap:6,justifyContent:"center",border:"1px solid rgba(143,188,74,0.2)"}}>
+   🌱 Compartir
+  </button>
  ))}
- </div>
- <button onClick={()=>setCarIdx(c=>{ const n=c+1>=carousel.length?1:c+1; _lss("hv_caridx",String(n)); const nc=carousel[n]; if(nc&&nc.tipo==="novedad"&&!vistosNov.includes(nc.data.id)){setVistosNov(v=>[...v,nc.data.id]);lanzarConfetti();} return n; })} style={{...S.btn("rgba(255,255,255,0.07)","rgba(255,255,255,0.5)",8,"4px 10px"),fontSize:14,opacity:1}}>›</button>
+ {card.tipo!=="revelacion" && <div style={{flex:1}}></div>}
+ <button onClick={()=>setCarIdx(c=>{ const n=c+1>=carousel.length?1:c+1; _lss("hv_caridx",String(n)); const nc=carousel[n]; if(nc&&nc.tipo==="novedad"&&!vistosNov.includes(nc.data.id)){setVistosNov(v=>[...v,nc.data.id]);lanzarConfetti();} return n; })} style={{...S.btn("rgba(255,255,255,0.07)","rgba(255,255,255,0.5)",8,"4px 12px"),fontSize:16,opacity:1,flexShrink:0}}>›</button>
  </div>
  </div>
  <div style={{fontSize:14,fontWeight:700,color:"#2D5016",marginBottom:9}}>¿Qué quieres hacer hoy?</div>
@@ -772,7 +810,7 @@ export default function App() {
  return (
  <div style={{background:"#F5F0E8",minHeight:"100%",display:"flex",flexDirection:"column"}}>
  <div style={{background:"linear-gradient(160deg,#111e07,#2D5016)",padding:"44px 16px 0"}}>
- <div style={S.sb}><span>9:41</span><span>●●●</span></div>
+ <div style={S.sb}></div>
  <div style={{color:"white",fontSize:19,fontWeight:700,marginBottom:16}}>Recetas 🍽️</div>
  </div>
  <div style={{display:"flex",flex:1,overflow:"hidden"}}>
@@ -824,7 +862,7 @@ export default function App() {
  return (
  <div style={{background:"#F5F0E8",minHeight:"100%",overflowY:"auto"}}>
  <div style={{background:"linear-gradient(160deg,#111e07,#2D5016)",padding:"44px 18px 20px"}}>
- <div style={S.sb}><span>9:41</span><span>●●●</span></div>
+ <div style={S.sb}></div>
  <div style={{display:"inline-block",background:"rgba(232,184,75,0.18)",border:"1px solid rgba(232,184,75,0.35)",borderRadius:18,padding:"3px 10px",marginBottom:8}}>
  <span style={{fontSize:10,fontWeight:700,color:"#E8B84B",letterSpacing:1.5,textTransform:"uppercase"}}>🌱 Tu transición</span>
  </div>
@@ -962,7 +1000,7 @@ export default function App() {
  return (
  <div style={{background:"#FDFCFA",minHeight:"100%"}}>
  <div style={{background:`linear-gradient(160deg,#0a1a06,${p.col})`,padding:"44px 20px 20px"}}>
- <div style={S.sb}><span>9:41</span><span>●●●</span></div>
+ <div style={S.sb}></div>
  <div onClick={()=>go("rec")} style={S.bk()}>← La carta</div>
  <div style={{fontSize:42,marginBottom:8}}>{p.e}</div>
  <div style={{color:"white",fontSize:20,fontWeight:700,lineHeight:1.2,marginBottom:4}}>{p.nm}</div>
@@ -1028,7 +1066,7 @@ export default function App() {
  return (
  <div style={{background:"#FDFCFA",minHeight:"100%"}}>
  <div style={{background:`linear-gradient(160deg,#0a0a0a,${sup?.col||"#333"})`,padding:"44px 20px 0",transition:"background 0.4s"}}>
- <div style={S.sb}><span>9:41</span><span>●●●</span></div>
+ <div style={S.sb}></div>
  <div style={{color:"white",fontSize:20,fontWeight:700,marginBottom:14}}>Donde Comprar 🛒</div>
  <div style={{display:"flex",overflowX:"auto",scrollbarWidth:"none",gap:2}}>
  {SUPERMERCADOS.map(s=>(
@@ -1078,7 +1116,7 @@ export default function App() {
  const ApoyaScreen = () => (
  <div style={{background:"#070c05",minHeight:"100%"}}>
  <div style={{background:"linear-gradient(160deg,#040803,#0f1a08)",padding:"44px 20px 20px"}}>
- <div style={S.sb}><span>9:41</span><span>●●●</span></div>
+ <div style={S.sb}></div>
  <div style={{fontSize:34,marginBottom:8}}>✨</div>
  <div style={{color:"white",fontSize:22,fontWeight:900,marginBottom:4}}>Apoya el proyecto</div>
  <div style={{color:"rgba(255,255,255,0.45)",fontSize:13,lineHeight:1.6}}>Tú decides a dónde va tu contribución. 100% transparente.</div>
@@ -1146,7 +1184,7 @@ export default function App() {
  const MasScreen = () => (
  <div style={{background:"#070c05",minHeight:"100%"}}>
  <div style={{background:"linear-gradient(160deg,#040803,#0c1607)",padding:"44px 20px 20px"}}>
- <div style={S.sb}><span>9:41</span><span>●●●</span></div>
+ <div style={S.sb}></div>
  <div style={{color:"white",fontSize:22,fontWeight:900,marginBottom:3}}>Descubre más 🌿</div>
  <div style={{color:"rgba(255,255,255,0.42)",fontSize:13}}>Vive el veganismo con todos los sentidos</div>
  </div>
