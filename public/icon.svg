@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a3a08"/>
+      <stop offset="100%" stop-color="#2D5016"/>
+    </linearGradient>
+    <linearGradient id="silver" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f5f5f7"/>
+      <stop offset="40%" stop-color="#d8d8dc"/>
+      <stop offset="60%" stop-color="#a8a8ad"/>
+      <stop offset="100%" stop-color="#888890"/>
+    </linearGradient>
+    <linearGradient id="silverHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.6)"/>
+      <stop offset="50%" stop-color="rgba(255,255,255,0.1)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.2)"/>
+    </linearGradient>
+  </defs>
+  <!-- Dark green rounded background -->
+  <rect width="200" height="200" rx="40" fill="url(#bg)"/>
+  <!-- Silver shield -->
+  <path d="M100 22 L160 50 L160 105 Q160 150 100 178 Q40 150 40 105 L40 50 Z" fill="url(#silver)" stroke="#666670" stroke-width="2"/>
+  <!-- Highlight overlay for metallic look -->
+  <path d="M100 22 L160 50 L160 105 Q160 150 100 178 Q40 150 40 105 L40 50 Z" fill="url(#silverHighlight)" opacity="0.5"/>
+  <!-- Inner shield border -->
+  <path d="M100 36 L148 60 L148 104 Q148 142 100 162 Q52 142 52 104 L52 60 Z" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+  <!-- Top highlight -->
+  <path d="M100 26 L155 52 L155 80" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round"/>
+</svg>
