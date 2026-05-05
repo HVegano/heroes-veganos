@@ -567,7 +567,6 @@ function calcImpacto(dias) {
  };
 }
 export default function App() {
- const [onboarded,setOnboarded]  = useState(false);
  // Load from localStorage on startup - fixes "forgot who I am" bug
  const _ls = k => { try { return localStorage.getItem(k); } catch(e) { return null; } };
  const _lss = (k,v) => { try { localStorage.setItem(k,v); } catch(e) {} };
@@ -1347,61 +1346,48 @@ export default function App() {
  </div>
  );
  const screens = { home:<HomeScreen/>, rec:<RecScreen/>, cmp:<CmpScreen/>, apoya:<ApoyaScreen/>, mas:<MasScreen/>, plato:<PlatoScreen/>, esm:<EsmScreen/> };
- // ── ONBOARDING ──────────────────────────────────────────────────────────────
- if (!onboarded) return (
- <div style={{background:"#111",minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"system-ui,-apple-system,sans-serif"}}>
- <div style={{width:360,background:"linear-gradient(160deg,#111e07,#2D5016 60%,#3d6b1e)",borderRadius:28,padding:"40px 28px",boxShadow:"0 30px 60px rgba(0,0,0,0.8)",textAlign:"center"}}>
- <div style={{fontSize:56,marginBottom:16}}>🛡️</div>
- <div style={{color:"#E8B84B",fontSize:12,fontWeight:700,letterSpacing:3,textTransform:"uppercase",marginBottom:8}}>Bienvenido a</div>
- <div style={{color:"white",fontSize:32,fontWeight:900,marginBottom:4}}>Héroes Veganos</div>
- <div style={{color:"rgba(255,255,255,0.75)",fontSize:17,fontWeight:700,lineHeight:1.5,marginBottom:12}}>
- La manera más fácil de ser un héroe.
- </div>
- <div style={{color:"rgba(255,255,255,0.55)",fontSize:13,lineHeight:1.75,marginBottom:30}}>
- Esta app te facilita y mejora la vida a la vez que cuidas del planeta. Encontrarás recetas veganas,dónde comprar productos veganos,revelaciones que inspiran,turismo vegano,tu impacto positivo en tiempo real y mucho más.
- </div>
- <button onClick={()=>setOnboarded(true)} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a"),width:"100%",fontSize:16,padding:"15px",borderRadius:14,fontWeight:800}}>
- Quiero ser un Héroe 🌱
- </button>
- <div style={{color:"rgba(255,255,255,0.25)",fontSize:11,marginTop:12}}>{APP_URL}</div>
- </div>
- </div>
- );
  // ── REGISTRO ────────────────────────────────────────────────────────────────
  if (!registered) return (
  <div style={{background:"#111",minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"system-ui,-apple-system,sans-serif"}}>
  <div style={{width:360,background:"#FDFCFA",borderRadius:28,padding:"36px 28px",boxShadow:"0 30px 60px rgba(0,0,0,0.8)"}}>
  {regStep === 0 ? (
  <>
-  <div style={{textAlign:"center",marginBottom:16}}>
-   <div style={{fontSize:52,marginBottom:8}}>🛡️</div>
-   <div style={{fontSize:22,fontWeight:900,color:"#2D5016",lineHeight:1.2,marginBottom:10}}>Héroes Veganos</div>
-   <div style={{fontSize:13,color:"#555",lineHeight:1.65,marginBottom:18}}>
-    La manera más fácil de ser un héroe hoy en día.<br/><br/>
-    Todo lo que haces a los demás, te lo haces a ti. Esta app te da las herramientas para que dar el paso sea sencillo, claro y posible para cualquiera.<br/><br/>
-    <strong style={{color:"#2D5016"}}>Recetas. Productos. Dudas resueltas. Tu impacto en tiempo real.</strong><br/><br/>
-    Gratis. Sin registro complicado. En tu móvil siempre contigo.
-   </div>
+  <div style={{textAlign:"center",marginBottom:20}}>
+   <div style={{fontSize:52,marginBottom:10}}>🛡️</div>
+   <div style={{color:"#E8B84B",fontSize:11,fontWeight:700,letterSpacing:2,textTransform:"uppercase",marginBottom:6}}>Bienvenido a</div>
+   <div style={{fontSize:24,fontWeight:900,color:"#2D5016",lineHeight:1.2,marginBottom:10}}>Héroes Veganos</div>
+   <div style={{fontSize:14,fontWeight:700,color:"#333",lineHeight:1.5,marginBottom:10}}>La manera más fácil de ser un héroe hoy en día.</div>
+   <div style={{fontSize:12,color:"#777",lineHeight:1.7}}>Esta app te facilita la vida, mejora tu salud y tu energía mientras cuidas del planeta. Platos exquisitos y fáciles, donde conseguir productos, dudas resueltas, tu impacto positivo en tiempo real y mucho más.</div>
   </div>
-  {/* Botón instalar Android */}
-  {deferredPrompt && (
-   <button onClick={async ()=>{ deferredPrompt.prompt(); const r=await deferredPrompt.userChoice; if(r.outcome==="accepted"){setDeferredPrompt(null);} }} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a"),width:"100%",fontSize:14,padding:"13px",borderRadius:12,marginBottom:10,fontWeight:700}}>
+  {/* Android: botón instalar destacado */}
+  {deferredPrompt && !isIos() && (
+   <>
+   <button onClick={async ()=>{ deferredPrompt.prompt(); const r=await deferredPrompt.userChoice; if(r.outcome==="accepted"){setDeferredPrompt(null); setRegStep(1);} }} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a"),width:"100%",fontSize:15,padding:"14px",borderRadius:12,marginBottom:6,fontWeight:700}}>
     📲 Instalar app en tu móvil
    </button>
+   <div style={{textAlign:"center",fontSize:11,color:"#bbb",marginBottom:14}}>Se instala automáticamente en tu pantalla de inicio</div>
+   </>
   )}
-  {/* Tutorial iOS */}
+  {/* iPhone: botón que muestra pasos */}
   {isIos() && !isInStandaloneMode() && (
-   <div style={{background:"rgba(45,80,22,0.06)",border:"1px solid rgba(45,80,22,0.2)",borderRadius:12,padding:"12px 14px",marginBottom:12,fontSize:12,color:"#2D5016",lineHeight:1.6}}>
-    📲 <strong>Para instalarla en tu iPhone:</strong><br/>
-    1. Pulsa el botón <strong>Compartir ⬆️</strong> de Safari<br/>
-    2. Toca <strong>"Añadir a pantalla de inicio"</strong><br/>
-    3. Confirma con <strong>"Añadir"</strong>
+   <>
+   <div style={{background:"linear-gradient(135deg,#E8B84B,#C8983B)",borderRadius:12,padding:"14px",marginBottom:6,textAlign:"center",cursor:"pointer"}} onClick={()=>setRegStep(1)}>
+    <div style={{fontSize:15,fontWeight:700,color:"#1a1a1a"}}>📲 Instalar app en tu móvil</div>
    </div>
+   <div style={{background:"rgba(45,80,22,0.06)",border:"1px solid rgba(45,80,22,0.15)",borderRadius:10,padding:"10px 12px",marginBottom:14,fontSize:11,color:"#555",lineHeight:1.6,textAlign:"center"}}>
+    En iPhone: pulsa <strong>Compartir ⬆️</strong> en Safari → <strong>"Añadir a pantalla de inicio"</strong> → <strong>"Añadir"</strong>
+   </div>
+   </>
   )}
-  <button onClick={()=>setRegStep(1)} style={{...S.btn("linear-gradient(135deg,#2D5016,#4A7C2F)","white"),width:"100%",fontSize:15,padding:"14px",borderRadius:12}}>
-   ¡Quiero ser un Héroe! 🛡️
-  </button>
-  <div style={{textAlign:"center",marginTop:10,fontSize:11,color:"#ccc"}}>La app es 100% gratuita y no requiere registro de email</div>
+  {/* Si ya está instalada como PWA o es escritorio, solo botón continuar */}
+  {!deferredPrompt && (!isIos() || isInStandaloneMode()) && (
+   <button onClick={()=>setRegStep(1)} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a"),width:"100%",fontSize:15,padding:"14px",borderRadius:12,marginBottom:14,fontWeight:700}}>
+    📲 Continuar
+   </button>
+  )}
+  <div onClick={()=>setRegStep(1)} style={{textAlign:"center",cursor:"pointer"}}>
+   <span style={{color:"#aaa",fontSize:12,textDecoration:"underline"}}>Seguir en la web sin instalar →</span>
+  </div>
  </>
  ) : regStep === 1 ? (
  <>
