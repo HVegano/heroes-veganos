@@ -1362,6 +1362,25 @@ export default function App() {
  <div style={{fontSize:10,color:"rgba(255,255,255,0.3)"}}>🌱 Descarga la app: <span style={{color:"#8FBC4A"}}>{APP_URL}</span></div>
  </div>
  </div>
+ {/* Notificaciones */}
+ <div style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:16,padding:"14px",marginBottom:14}}>
+ <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:6}}>
+ <span style={{fontSize:16}}>🔔</span>
+ <div style={{fontSize:13,fontWeight:700,color:"white"}}>Notificaciones</div>
+ </div>
+ <div style={{fontSize:12,color:"rgba(255,255,255,0.5)",lineHeight:1.6,marginBottom:10}}>Activa las notificaciones para saber cuándo hay nuevos productos veganos, novedades o cualquier información importante.</div>
+ <button onClick={async ()=>{
+  if(typeof window.OneSignalDeferred !== "undefined"){
+   window.OneSignalDeferred.push(async function(OneSignal){
+    await OneSignal.Notifications.requestPermission();
+   });
+  } else {
+   alert("Las notificaciones no están disponibles en este momento. Asegúrate de tener la app instalada.");
+  }
+ }} style={{...S.btn("linear-gradient(135deg,#2D5016,#4A7C2F)","white"),width:"100%",fontSize:13,padding:"11px",borderRadius:10,fontWeight:700,display:"flex",alignItems:"center",gap:8,justifyContent:"center"}}>
+ 🔔 Activar notificaciones
+ </button>
+ </div>
  <div style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:16,padding:"14px",marginBottom:14}}>
  <div style={{fontSize:13,fontWeight:700,color:"white",marginBottom:6}}>✉️ Contacto</div>
  <div style={{fontSize:12,color:"rgba(255,255,255,0.5)",lineHeight:1.6,marginBottom:8}}>¿Tienes sugerencias,quieres colaborar o simplemente quieres saludar?</div>
@@ -1518,6 +1537,14 @@ export default function App() {
  _lss("hv_vegano",yaEsVegano?"1":"0");
  _lss("hv_fecha",fechaVegano);
  setRegistered(true);
+ // Pedir permiso de notificaciones justo tras registrarse
+ setTimeout(()=>{
+  if(window.OneSignalDeferred){
+   window.OneSignalDeferred.push(async function(OneSignal){
+    try { await OneSignal.Notifications.requestPermission(); } catch(e) {}
+   });
+  }
+ }, 1500);
  }}
  style={{...S.btn("linear-gradient(135deg,#2D5016,#4A7C2F)","white"),width:"100%",fontSize:15,padding:"14px",borderRadius:12,opacity:(yaEsVegano===null||(yaEsVegano&&!fechaVegano))?0.4:1}}
  >
