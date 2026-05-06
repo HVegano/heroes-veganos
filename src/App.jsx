@@ -692,33 +692,38 @@ export default function App() {
  <div style={{background:"#F5F0E8",minHeight:"100%"}}>
  <div style={{background:"linear-gradient(160deg,#111e07,#2D5016 60%,#3d6b1e)",padding:"44px 20px 20px"}}>
  <div style={S.sb}></div>
- <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:14}}>
- <div>
- <div style={{color:"rgba(255,255,255,0.5)",fontSize:12,marginBottom:2}}>Bienvenido,</div>
- <div style={{color:"white",fontSize:22,fontWeight:700}}>{nombre}</div>
- <div style={{display:"inline-flex",alignItems:"center",gap:5,background:"rgba(232,184,75,0.15)",border:"1px solid rgba(232,184,75,0.3)",borderRadius:8,padding:"4px 9px",marginTop:5}}>
- <span style={{fontSize:14}}>🛡️</span>
- <span style={{fontSize:11,fontWeight:700,color:"#E8B84B"}}>{nivelE} {nivel} · Día {diasVegano}</span>
+ {/* Nombre + escudo grande */}
+ <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:12}}>
+ <span style={{fontSize:28}}>🛡️</span>
+ <span style={{fontSize:22,fontWeight:900,color:"white"}}>{nombre}</span>
  </div>
- </div>
+ {/* Tu legado label + contadores */}
+ <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:10}}>
+ <div style={{fontSize:9,fontWeight:700,color:"#E8B84B",letterSpacing:2,textTransform:"uppercase",marginTop:4}}>Tu legado</div>
  <div style={{display:"flex",flexDirection:"column",gap:4,alignItems:"flex-end"}}>
  {[["🐾",impacto.vidas+" vidas"],["💧",impacto.agua+" L"],["🌿",impacto.co2+" kg CO₂"]].map(([e,t])=>(
- <div key={t} style={{display:"flex",alignItems:"center",gap:5,background:"rgba(255,255,255,0.07)",borderRadius:8,padding:"3px 8px"}}>
- <span style={{fontSize:11}}>{e}</span>
- <span style={{fontSize:10,color:"rgba(255,255,255,0.7)",fontWeight:600}}>{t}</span>
+ <div key={t} style={{display:"flex",alignItems:"center",gap:5,background:"rgba(255,255,255,0.07)",borderRadius:8,padding:"4px 10px"}}>
+ <span style={{fontSize:13}}>{e}</span>
+ <span style={{fontSize:14,color:"rgba(255,255,255,0.9)",fontWeight:700}}>{t}</span>
  </div>
  ))}
  </div>
  </div>
+ {/* Barra con nivel y días dentro */}
  <div style={{background:"rgba(255,255,255,0.08)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:13,padding:"11px 14px"}}>
- <div style={{display:"flex",justifyContent:"space-between",marginBottom:3}}>
- <span style={{color:"rgba(255,255,255,0.5)",fontSize:11}}>Tu legado crece</span>
- <span style={{color:"#E8B84B",fontSize:16,fontWeight:700}}>{diasVegano} <span style={{fontSize:10,fontWeight:400,color:"rgba(255,255,255,0.35)"}}>días</span></span>
+ <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:4}}>
+ <div>
+ <div style={{fontSize:9,fontWeight:700,color:"#E8B84B",letterSpacing:2,textTransform:"uppercase",marginBottom:2}}>Tu legado crece</div>
+ <div style={{color:"rgba(255,255,255,0.35)",fontSize:10}}>
+ {nivelIdx >= NIVELES.length - 1 ? "¡Nivel máximo! 💫" : `${Math.round(nivelPct)}% hacia ${nivelSig.e} ${nivelSig.nm}`}
  </div>
- <div style={{color:"rgba(255,255,255,0.35)",fontSize:10,marginBottom:7}}>
- {nivelIdx >= NIVELES.length - 1 ? "¡Has alcanzado el nivel máximo! 💫" : `${Math.round(nivelPct)}% hacia ${nivelSig.e} ${nivelSig.nm}`}
  </div>
- <div style={{background:"rgba(0,0,0,0.3)",borderRadius:6,height:6}}>
+ <div style={{textAlign:"right"}}>
+ <div style={{fontSize:13,fontWeight:700,color:"white",marginBottom:2}}>{nivelE} {nivel}</div>
+ <div><span style={{fontSize:20,fontWeight:900,color:"#E8B84B"}}>{diasVegano}</span> <span style={{fontSize:10,color:"rgba(255,255,255,0.35)"}}>días</span></div>
+ </div>
+ </div>
+ <div style={{background:"rgba(0,0,0,0.3)",borderRadius:6,height:6,marginTop:6}}>
  <div style={{width:nivelPct+"%",height:"100%",background:"linear-gradient(90deg,#5a9e20,#8FBC4A,#E8B84B)",borderRadius:6,transition:"width 1s"}}></div>
  </div>
  </div>
@@ -1160,11 +1165,7 @@ export default function App() {
  <div style={{color:"#8FBC4A",fontSize:11,fontWeight:700,letterSpacing:2,textTransform:"uppercase",marginBottom:8,textAlign:"center"}}>✦ Comparte tu legado ✦</div>
  <div style={{color:"white",fontSize:16,fontWeight:900,lineHeight:1.3,marginBottom:5,textAlign:"center"}}>Cada decisión tuya<br/><span style={{color:"#E8B84B",fontStyle:"italic"}}>planta una semilla en otros</span></div>
  <div style={{color:"rgba(255,255,255,0.45)",fontSize:12,textAlign:"center",marginBottom:12,fontStyle:"italic"}}>{APP_TAGLINE}</div>
- <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:7}}>
- {[["📸","linear-gradient(135deg,#C13584,#7B2FBE)","Instagram"],["💬","#128C7E","WhatsApp"],["👍","#1877F2","Facebook"],["✕","#1a1a1a","Twitter"]].map(([e,bg,t])=>(
- <button key={t} onClick={shareLegado} style={{...S.btn(bg,"white",10,"9px 10px"),display:"flex",alignItems:"center",gap:6,justifyContent:"center",fontSize:12,border:t==="Twitter"?"1px solid #333":"none"}}>{e} {t}</button>
- ))}
- </div>
+ <button onClick={shareLegado} style={{...S.btn("#25D366","white"),width:"100%",fontSize:14,padding:"13px",borderRadius:10,fontWeight:800}}>📤 Compartir</button>
  <div style={{textAlign:"center",marginTop:10}}>
  <div style={{fontSize:10,color:"rgba(255,255,255,0.3)"}}>🌱 Descarga la app: <span style={{color:"#8FBC4A"}}>{APP_URL}</span></div>
  </div>
@@ -1221,14 +1222,24 @@ export default function App() {
  <div onClick={()=>setDocsOpen(!docsOpen)} style={{display:"flex",alignItems:"center",gap:13,padding:"14px",cursor:"pointer"}}>
  <div style={{width:48,height:48,borderRadius:13,background:"rgba(255,255,255,0.1)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0}}>🎬</div>
  <div style={{flex:1}}>
- <div style={{fontSize:15,fontWeight:700,color:"white",marginBottom:2}}>Documentales y Canales</div>
- <div style={{fontSize:12,color:"rgba(255,255,255,0.5)"}}>11 docs · 6 canales de YouTube</div>
+ <div style={{fontSize:15,fontWeight:700,color:"white",marginBottom:2}}>Canales y Documentales</div>
+ <div style={{fontSize:12,color:"rgba(255,255,255,0.5)"}}>6 canales · 11 documentales</div>
  </div>
  <span style={{color:"rgba(255,255,255,0.4)",fontSize:18,transform:docsOpen?"rotate(180deg)":"none",transition:"transform 0.3s"}}>▾</span>
  </div>
  {docsOpen && (
  <div style={{borderTop:"1px solid rgba(255,255,255,0.1)",padding:"10px 12px 12px"}}>
- <div style={{fontSize:10,fontWeight:700,color:"rgba(74,158,191,0.9)",letterSpacing:1.5,textTransform:"uppercase",marginBottom:8}}>🎥 Documentales</div>
+ <div style={{fontSize:10,fontWeight:700,color:"rgba(74,158,191,0.9)",letterSpacing:1.5,textTransform:"uppercase",marginBottom:8}}>📺 Canales de YouTube</div>
+ {CANALES.map(canal=>(
+ <div key={canal.id} onClick={()=>window.open(canal.url,"_blank")} style={{background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.07)",borderRadius:12,padding:"10px 12px",marginBottom:7,cursor:"pointer",display:"flex",gap:10,alignItems:"flex-start"}}>
+ <div style={{width:34,height:34,borderRadius:9,background:"rgba(255,80,0,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}>{canal.e}</div>
+ <div style={{flex:1}}>
+ <div style={{fontSize:13,fontWeight:700,color:"white",marginBottom:3}}>{canal.nm}</div>
+ <div style={{fontSize:11,color:"rgba(255,255,255,0.55)",lineHeight:1.5}}>{canal.desc}</div>
+ </div>
+ </div>
+ ))}
+ <div style={{fontSize:10,fontWeight:700,color:"rgba(74,158,191,0.9)",letterSpacing:1.5,textTransform:"uppercase",margin:"14px 0 8px"}}>🎥 Documentales</div>
  {DOCUMENTALES.map(d=>(
  <div key={d.id} onClick={()=>window.open(d.url,"_blank")} style={{background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.07)",borderRadius:12,padding:"10px 12px",marginBottom:7,cursor:"pointer"}}>
  <div style={{display:"flex",alignItems:"center",gap:9,marginBottom:4}}>
@@ -1240,16 +1251,6 @@ export default function App() {
  <span style={{fontSize:10,fontWeight:600,color:d.plat.includes("gratis")?"rgba(143,188,74,0.9)":"rgba(229,9,20,0.9)",background:d.plat.includes("gratis")?"rgba(143,188,74,0.12)":"rgba(229,9,20,0.12)",padding:"2px 7px",borderRadius:8,flexShrink:0}}>{d.plat}</span>
  </div>
  <div style={{fontSize:11,color:"rgba(255,255,255,0.55)",lineHeight:1.5}}>{d.desc}</div>
- </div>
- ))}
- <div style={{fontSize:10,fontWeight:700,color:"rgba(74,158,191,0.9)",letterSpacing:1.5,textTransform:"uppercase",margin:"14px 0 8px"}}>📺 Canales de YouTube</div>
- {CANALES.map(canal=>(
- <div key={canal.id} onClick={()=>window.open(canal.url,"_blank")} style={{background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.07)",borderRadius:12,padding:"10px 12px",marginBottom:7,cursor:"pointer",display:"flex",gap:10,alignItems:"flex-start"}}>
- <div style={{width:34,height:34,borderRadius:9,background:"rgba(255,80,0,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}>{canal.e}</div>
- <div style={{flex:1}}>
- <div style={{fontSize:13,fontWeight:700,color:"white",marginBottom:3}}>{canal.nm}</div>
- <div style={{fontSize:11,color:"rgba(255,255,255,0.55)",lineHeight:1.5}}>{canal.desc}</div>
- </div>
  </div>
  ))}
  </div>
@@ -1298,11 +1299,7 @@ export default function App() {
  <div style={{color:"#8FBC4A",fontSize:11,fontWeight:700,letterSpacing:2,textTransform:"uppercase",marginBottom:8,textAlign:"center"}}>✦ Comparte tu legado ✦</div>
  <div style={{color:"white",fontSize:16,fontWeight:900,lineHeight:1.3,marginBottom:5,textAlign:"center"}}>Cada decisión tuya<br/><span style={{color:"#E8B84B",fontStyle:"italic"}}>planta una semilla en otros</span></div>
  <div style={{color:"rgba(255,255,255,0.45)",fontSize:12,textAlign:"center",marginBottom:12,fontStyle:"italic"}}>{APP_TAGLINE}</div>
- <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:7}}>
- {[["📸","linear-gradient(135deg,#C13584,#7B2FBE)"],["💬","#128C7E"],["👍","#1877F2"],["✕","#1a1a1a"]].map(([e,bg,t])=>(
- <button key={t} onClick={shareLegado} style={{...S.btn(bg,"white",10,"9px 10px"),display:"flex",alignItems:"center",gap:6,justifyContent:"center",fontSize:12,border:t==="Twitter"?"1px solid #333":"none"}}>{e} {t}</button>
- ))}
- </div>
+ <button onClick={shareLegado} style={{...S.btn("#25D366","white"),width:"100%",fontSize:14,padding:"13px",borderRadius:10,fontWeight:800}}>📤 Compartir</button>
  <div style={{textAlign:"center",marginTop:10}}>
  <div style={{fontSize:10,color:"rgba(255,255,255,0.3)"}}>🌱 Descarga la app: <span style={{color:"#8FBC4A"}}>{APP_URL}</span></div>
  </div>
@@ -1348,45 +1345,53 @@ export default function App() {
  const screens = { home:<HomeScreen/>, rec:<RecScreen/>, cmp:<CmpScreen/>, apoya:<ApoyaScreen/>, mas:<MasScreen/>, plato:<PlatoScreen/>, esm:<EsmScreen/> };
  // ── REGISTRO ────────────────────────────────────────────────────────────────
  if (!registered) return (
- <div style={{background:"#111",minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"system-ui,-apple-system,sans-serif"}}>
- <div style={{width:360,background:"#FDFCFA",borderRadius:28,padding:"36px 28px",boxShadow:"0 30px 60px rgba(0,0,0,0.8)"}}>
+ <div style={{background:"#0a0f06",minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"20px 16px",fontFamily:"system-ui,-apple-system,sans-serif",overflowY:"auto"}}>
+ <div style={{width:"100%",maxWidth:400,background:"linear-gradient(160deg,#111e07,#2D5016 60%,#3d6b1e)",borderRadius:28,padding:"32px 24px",boxShadow:"0 30px 60px rgba(0,0,0,0.8)"}}>
  {regStep === 0 ? (
  <>
   <div style={{textAlign:"center",marginBottom:20}}>
-   <div style={{fontSize:52,marginBottom:10}}>🛡️</div>
-   <div style={{color:"#E8B84B",fontSize:11,fontWeight:700,letterSpacing:2,textTransform:"uppercase",marginBottom:6}}>Bienvenido a</div>
-   <div style={{fontSize:24,fontWeight:900,color:"#2D5016",lineHeight:1.2,marginBottom:10}}>Héroes Veganos</div>
-   <div style={{fontSize:14,fontWeight:700,color:"#333",lineHeight:1.5,marginBottom:10}}>La manera más fácil de ser un héroe hoy en día.</div>
-   <div style={{fontSize:12,color:"#777",lineHeight:1.7}}>Esta app te facilita la vida, mejora tu salud y tu energía mientras cuidas del planeta. Platos exquisitos y fáciles, donde conseguir productos, dudas resueltas, tu impacto positivo en tiempo real y mucho más.</div>
+   <div style={{fontSize:52,marginBottom:8}}>🛡️</div>
+   <div style={{color:"#E8B84B",fontSize:11,fontWeight:700,letterSpacing:3,textTransform:"uppercase",marginBottom:6}}>Bienvenido a</div>
+   <div style={{fontSize:26,fontWeight:900,color:"white",lineHeight:1.2,marginBottom:8}}>Héroes Veganos</div>
+   <div style={{fontSize:14,fontWeight:700,color:"rgba(255,255,255,0.85)",lineHeight:1.5,marginBottom:10}}>La manera más fácil de ser un héroe hoy en día.</div>
+   <div style={{fontSize:12,color:"rgba(255,255,255,0.55)",lineHeight:1.7}}>Esta app te facilita la vida, mejora tu salud y tu energía mientras cuidas del planeta. Platos exquisitos y fáciles, donde conseguir productos, dudas resueltas, tu impacto positivo en tiempo real y mucho más.</div>
   </div>
-  {/* Android: botón instalar destacado */}
+  {/* Android con prompt automático */}
   {deferredPrompt && !isIos() && (
    <>
-   <button onClick={async ()=>{ deferredPrompt.prompt(); const r=await deferredPrompt.userChoice; if(r.outcome==="accepted"){setDeferredPrompt(null); setRegStep(1);} }} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a"),width:"100%",fontSize:15,padding:"14px",borderRadius:12,marginBottom:6,fontWeight:700}}>
+   <button onClick={async ()=>{ deferredPrompt.prompt(); const r=await deferredPrompt.userChoice; if(r.outcome==="accepted"){setDeferredPrompt(null); setRegStep(1);} }} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a"),width:"100%",fontSize:15,padding:"14px",borderRadius:12,marginBottom:4,fontWeight:800}}>
     📲 Instalar app en tu móvil
    </button>
-   <div style={{textAlign:"center",fontSize:11,color:"#bbb",marginBottom:14}}>Se instala automáticamente en tu pantalla de inicio</div>
+   <div style={{textAlign:"center",fontSize:11,color:"rgba(255,255,255,0.35)",marginBottom:14}}>Android · Se instala automáticamente</div>
    </>
   )}
-  {/* iPhone: botón que muestra pasos */}
+  {/* Android SIN prompt (ya instalada o Chrome no lo lanzó) */}
+  {!deferredPrompt && !isIos() && !isInStandaloneMode() && (
+   <>
+   <div style={{background:"rgba(232,184,75,0.12)",border:"1px solid rgba(232,184,75,0.3)",borderRadius:12,padding:"12px 14px",marginBottom:10,fontSize:12,color:"rgba(255,255,255,0.7)",lineHeight:1.7,textAlign:"left"}}>
+    📲 <strong style={{color:"#E8B84B"}}>Instalar en Android:</strong><br/>
+    1. Pulsa los <strong style={{color:"#E8B84B"}}>3 puntos ⋮</strong> arriba a la derecha en Chrome<br/>
+    2. Toca <strong style={{color:"#E8B84B"}}>"Añadir a pantalla de inicio"</strong><br/>
+    3. Confirma con <strong style={{color:"#E8B84B"}}>"Instalar"</strong>
+   </div>
+   </>
+  )}
+  {/* iPhone */}
   {isIos() && !isInStandaloneMode() && (
    <>
-   <div style={{background:"linear-gradient(135deg,#E8B84B,#C8983B)",borderRadius:12,padding:"14px",marginBottom:6,textAlign:"center",cursor:"pointer"}} onClick={()=>setRegStep(1)}>
-    <div style={{fontSize:15,fontWeight:700,color:"#1a1a1a"}}>📲 Instalar app en tu móvil</div>
-   </div>
-   <div style={{background:"rgba(45,80,22,0.06)",border:"1px solid rgba(45,80,22,0.15)",borderRadius:10,padding:"10px 12px",marginBottom:14,fontSize:11,color:"#555",lineHeight:1.6,textAlign:"center"}}>
-    En iPhone: pulsa <strong>Compartir ⬆️</strong> en Safari → <strong>"Añadir a pantalla de inicio"</strong> → <strong>"Añadir"</strong>
+   <div style={{background:"rgba(232,184,75,0.12)",border:"1px solid rgba(232,184,75,0.3)",borderRadius:12,padding:"12px 14px",marginBottom:10,fontSize:12,color:"rgba(255,255,255,0.7)",lineHeight:1.7,textAlign:"left"}}>
+    📲 <strong style={{color:"#E8B84B"}}>Instalar en iPhone:</strong><br/>
+    1. Pulsa <strong style={{color:"#E8B84B"}}>Compartir ⬆️</strong> en Safari<br/>
+    2. Toca <strong style={{color:"#E8B84B"}}>"Añadir a pantalla de inicio"</strong><br/>
+    3. Confirma con <strong style={{color:"#E8B84B"}}>"Añadir"</strong>
    </div>
    </>
   )}
-  {/* Si ya está instalada como PWA o es escritorio, solo botón continuar */}
-  {!deferredPrompt && (!isIos() || isInStandaloneMode()) && (
-   <button onClick={()=>setRegStep(1)} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a"),width:"100%",fontSize:15,padding:"14px",borderRadius:12,marginBottom:14,fontWeight:700}}>
-    📲 Continuar
-   </button>
-  )}
+  <button onClick={()=>setRegStep(1)} style={{...S.btn("linear-gradient(135deg,#E8B84B,#C8983B)","#1a1a1a"),width:"100%",fontSize:15,padding:"14px",borderRadius:12,marginBottom:10,fontWeight:800}}>
+   ¡Quiero ser un Héroe! 🛡️
+  </button>
   <div onClick={()=>setRegStep(1)} style={{textAlign:"center",cursor:"pointer"}}>
-   <span style={{color:"#aaa",fontSize:12,textDecoration:"underline"}}>Seguir en la web sin instalar →</span>
+   <span style={{color:"rgba(255,255,255,0.25)",fontSize:11,textDecoration:"underline"}}>Seguir en la web sin instalar →</span>
   </div>
  </>
  ) : regStep === 1 ? (
