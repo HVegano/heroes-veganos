@@ -609,10 +609,9 @@ export default function App() {
   return () => window.removeEventListener("beforeinstallprompt", handler);
  }, []);
 
- // OneSignal — load after user is registered to avoid intrusive prompt on first visit
+ // OneSignal — load on mount always
  useEffect(() => {
-  if (!registered) return;
-  if (window.OneSignalDeferred) return; // already loaded
+  if (window.OneSignalDeferred) return;
   window.OneSignalDeferred = window.OneSignalDeferred || [];
   const script = document.createElement("script");
   script.src = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
@@ -628,7 +627,7 @@ export default function App() {
    });
   };
   document.head.appendChild(script);
- }, [registered]);
+ }, []);
 
  // Compute days as vegan
  const diasVegano = (() => {
