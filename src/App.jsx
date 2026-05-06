@@ -538,6 +538,7 @@ const S = {
  bk:(c="rgba(255,255,255,0.55)")=>({ color:c,fontSize:13,cursor:"pointer",marginBottom:8,display:"inline-flex",alignItems:"center",gap:4 }),btn:(bg,c,r=12,p="12px 16px")=>({ border:"none",cursor:"pointer",fontFamily:"system-ui",background:bg,color:c,borderRadius:r,padding:p,fontSize:14,fontWeight:600 }),
 };
 const APP_URL = "https://heroesveganos.app";
+const ONESIGNAL_APP_ID = "3732e253-225c-43b7-9cc6-340cf2113836";
 
 // 📲 PWA Install
 const isIos = () => /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
@@ -607,6 +608,27 @@ export default function App() {
   window.addEventListener("beforeinstallprompt", handler);
   return () => window.removeEventListener("beforeinstallprompt", handler);
  }, []);
+
+ // OneSignal — load after user is registered to avoid intrusive prompt on first visit
+ useEffect(() => {
+  if (!registered) return;
+  if (window.OneSignalDeferred) return; // already loaded
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  const script = document.createElement("script");
+  script.src = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
+  script.defer = true;
+  script.onload = () => {
+   window.OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+     appId: ONESIGNAL_APP_ID,
+     safari_web_id: "",
+     notifyButton: { enable: false },
+     allowLocalhostAsSecureOrigin: false,
+    });
+   });
+  };
+  document.head.appendChild(script);
+ }, [registered]);
 
  // Compute days as vegan
  const diasVegano = (() => {
