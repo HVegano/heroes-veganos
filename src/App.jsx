@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { useState, useEffect } from "react";
 const REVELACIONES = [
  {id:"r1",e:"💧",f:["Producir ","1 kg de ternera"," consume tanta agua como ducharse durante ","6 meses"],q:"\"Lo que haces a la naturaleza, te lo haces a ti mismo.\""},
@@ -1601,6 +1602,7 @@ export default function App() {
  style={{position:"absolute",bottom:70,right:12,width:46,height:46,borderRadius:"50%",background:"linear-gradient(135deg,#F5D770,#E8B84B,#C8983B)",border:"2px solid rgba(255,235,150,0.9)",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",fontSize:24,lineHeight:1,zIndex:200,boxShadow:mantraPlaying?"0 0 0 4px rgba(232,184,75,0.45),0 0 0 9px rgba(232,184,75,0.18),0 4px 14px rgba(200,150,50,0.5)":"0 0 0 2px rgba(232,184,75,0.25),0 4px 12px rgba(0,0,0,0.4)",transition:"all 0.3s",userSelect:"none"}}
  ><span style={{color:"#1a1a1a",fontSize:24,fontWeight:800,lineHeight:1}}>♫</span></div>
  </div>
+  <SpeedInsights />
  </div>
  );
 }
