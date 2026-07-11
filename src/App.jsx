@@ -734,12 +734,12 @@ export default function App() {
  // Compute days as vegan
  const diasVegano = (() => {
  if (!registered) return 30;
- if (yaEsVegano && fechaVegano) {
+ if (fechaVegano) {
  const start = new Date(fechaVegano);
  const diff = Math.floor((Date.now() - start.getTime()) / 86400000);
  return Math.max(1,diff);
  }
- return 1; // started today
+ return 1;
  })();
  const impacto = calcImpacto(diasVegano);
  // Cuerpo: valores que crecen con el tiempo,llegando al 100% en 1 año
