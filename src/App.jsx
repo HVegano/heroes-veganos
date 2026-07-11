@@ -1666,10 +1666,13 @@ export default function App() {
  onClick={()=>{
  if(yaEsVegano===null) return;
  if(yaEsVegano && !fechaVegano) return;
+ // Si empieza hoy, guardamos la fecha de HOY como fecha de inicio real
+ const fechaFinal = yaEsVegano ? fechaVegano : new Date().toISOString().split("T")[0];
  _lss("hv_reg","1");
  _lss("hv_name",regName);
  _lss("hv_vegano",yaEsVegano?"1":"0");
- _lss("hv_fecha",fechaVegano);
+ _lss("hv_fecha",fechaFinal);
+ setFechaVegano(fechaFinal);
  setRegistered(true);
  // Pedir permiso de notificaciones justo tras registrarse
  setTimeout(()=>{
