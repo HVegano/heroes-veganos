@@ -635,6 +635,15 @@ export default function App() {
  const [mantraPlaying,setMantraPlaying] = useState(false);
  const [mantraShown,setMantraShown]  = useState(false);
  const [mantraTooltip,setMantraTooltip] = useState(false);
+ // 🔧 Migración: arregla a usuarios que ya tenían el bug de "empiezo hoy"
+ // (registrados, con yaEsVegano=false y sin fechaVegano guardada)
+ useEffect(() => {
+  if (registered && yaEsVegano === false && !fechaVegano) {
+   const hoy = new Date().toISOString().split("T")[0];
+   _lss("hv_fecha", hoy);
+   setFechaVegano(hoy);
+  }
+ }, []); // eslint-disable-line react-hooks/exhaustive-deps
  // Auto-update: register SW and listen for new versions (smart, non-disruptive)
  useEffect(() => {
   if (!('serviceWorker' in navigator)) return;
